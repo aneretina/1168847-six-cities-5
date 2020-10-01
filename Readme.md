@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Neretina Anna](https://up.htmlacademy.ru/react/5/user/1168847).
-* Наставник: `Неизвестно`.
+* Наставник: `[Цапко Андрей](https://htmlacademy.ru/profile/id1350525)`.
 
 ---
 
