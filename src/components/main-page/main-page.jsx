@@ -117,7 +117,7 @@ const MainPage = (props) => {
                       </div>
                     </div>
                     <h2 className="place-card__name">
-                      <a href="#">Beautiful &amp; luxurious apartment at great location</a>
+                      <a href="#">Beautiful & luxurious apartment at great location</a>
                     </h2>
                     <p className="place-card__type">Apartment</p>
                   </div>
