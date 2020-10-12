@@ -7,7 +7,7 @@ import Favorites from "../favorites/favorites";
 import Property from "../property/property";
 
 const App = (props) => {
-  const {offers} = props;
+  const {offers, reviews} = props;
 
 
   return (
@@ -22,9 +22,15 @@ const App = (props) => {
         <Route exact path="/favorites">
           <Favorites />
         </Route>
-        <Route exact path="/offer/:id">
-          <Property offer={offers[0]} />
-        </Route>
+        <Route exact path='/offer/:id'
+          render={({match}) => (
+            <Property
+              id={match.params.id}
+              offers={offers}
+              reviews={reviews}
+            />
+          )}
+        />
         <Route>
           <Fragment>
             <h1 style={{display: `block`, textAlign: `center`}}>Page not found</h1>
@@ -37,7 +43,6 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  placesCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -53,7 +58,15 @@ App.propTypes = {
     avatar: PropTypes.array.isRequired,
     host: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired
-  }))
+  })).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.array.isRequired,
+    rating: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired
 };
 
 export default App;

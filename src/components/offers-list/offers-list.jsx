@@ -6,7 +6,14 @@ class OffersList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {isActive: null};
+    this.state = {activeOffer: null};
+    this._handleOfferHover = this._handleOfferHover.bind(this);
+  }
+
+  _handleOfferHover(id) {
+    this.setState({
+      activeOffer: id
+    });
   }
 
   render() {
@@ -18,11 +25,8 @@ class OffersList extends PureComponent {
           <OfferCard
             key={offer.id}
             offer={offer}
-            offerActive={() => {
-              this.setState(() => ({
-                isActive: offer,
-              }));
-            }}
+            id = {offer.id}
+            onHoverOffer = {this._handleOfferHover}
           />))}
       </div>
     );
