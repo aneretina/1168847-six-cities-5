@@ -9,3 +9,4 @@ export const Icon = {
   SIZE: [30, 30],
 };
 
+export const ID_MAP_CONTAINER = `map`;

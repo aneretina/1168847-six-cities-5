@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 import {Link} from 'react-router-dom';
 import NewCommentForm from "../new-comment-form/new-comment-form";
 import OffersNearList from "../offers-near-list/offers-near-list";
+import OfferMap from "../offer-map/offer-map";
 
 const Property = (props) => {
   const {offers, reviews, id} = props;
@@ -147,7 +148,7 @@ const Property = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <OfferMap offers={offers} className={`property__map`} />
         </section>
         <div className="container">
           <OffersNearList offers={offers}></OffersNearList>
