@@ -7,8 +7,8 @@ import reviews from "./mocks/reviews";
 
 ReactDOM.render(
     <App
-      offers= {offers}
-      reviews = {reviews}
+      offers={offers}
+      reviews={reviews}
     />,
     document.querySelector(`#root`)
 );

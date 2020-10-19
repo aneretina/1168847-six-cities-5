@@ -28,8 +28,8 @@ class OffersNearList extends PureComponent {
             <OfferCard
               key={offer.id}
               offer={offer}
-              id = {offer.id}
-              onHoverOffer = {this._handleOfferHover}
+              id={offer.id}
+              onHoverOffer={this._handleOfferHover}
             />))}
         </div>
       </section>
