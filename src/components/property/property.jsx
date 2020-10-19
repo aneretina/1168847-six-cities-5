@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import Moment from 'react-moment';
 import {Link} from 'react-router-dom';
 import NewCommentForm from "../new-comment-form/new-comment-form";
-import OffersNearList from "../offers-near-list/offers-near-list";
 import OfferMap from "../offer-map/offer-map";
+import OffersList from "../offers-list/offers-list";
 
 const Property = (props) => {
   const {offers, reviews, id} = props;
+  const nearOffers = offers.slice(0, 3);
 
   const offer = offers.find((offerCurrent) => offerCurrent.id === Number(id));
 
@@ -148,10 +149,10 @@ const Property = (props) => {
               </section>
             </div>
           </div>
-          <OfferMap offers={offers} className={`property__map`} />
+          <OfferMap offers={nearOffers} className={`property__map`} />
         </section>
         <div className="container">
-          <OffersNearList offers={offers}></OffersNearList>
+          <OffersList offers = {nearOffers} />
         </div>
       </main>
     </div>
