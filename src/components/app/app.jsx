@@ -1,20 +1,18 @@
 import React, {Fragment} from "react";
 import {Switch, Route, BrowserRouter, Link} from "react-router-dom";
-import MainPage from "../main-page/main-page";
 import PropTypes from "prop-types";
+import MainPage from "../main-page/main-page";
 import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import Property from "../property/property";
 
 const App = (props) => {
   const {offers, reviews} = props;
-
-
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainPage offers={offers} />
+          <MainPage />
         </Route>
         <Route exact path="/login">
           <Login />

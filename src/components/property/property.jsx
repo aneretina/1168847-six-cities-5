@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import Moment from 'react-moment';
 import {Link} from 'react-router-dom';
@@ -7,7 +8,7 @@ import OfferMap from "../offer-map/offer-map";
 import OffersList from "../offers-list/offers-list";
 
 const Property = (props) => {
-  const {offers, reviews, id} = props;
+  const {offers, reviews, id, activeCity} = props;
   const nearOffers = offers.slice(0, 3);
 
   const offer = offers.find((offerCurrent) => offerCurrent.id === Number(id));
@@ -149,7 +150,9 @@ const Property = (props) => {
               </section>
             </div>
           </div>
-          <OfferMap offers={nearOffers} className={`property__map`} />
+          <OfferMap offers={nearOffers}
+            activeCity={activeCity}
+            className={`property__map`} />
         </section>
         <div className="container">
           <OffersList offers = {nearOffers} />
@@ -160,6 +163,7 @@ const Property = (props) => {
 };
 
 Property.propTypes = {
+  activeCity: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -184,5 +188,10 @@ Property.propTypes = {
   })).isRequired
 };
 
-export default Property;
+const mapStateToProps = (state) => ({
+  activeCity: state.city,
+});
+
+export {Property};
+export default connect(mapStateToProps)(Property);
 
