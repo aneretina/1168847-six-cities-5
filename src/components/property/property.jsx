@@ -11,7 +11,7 @@ const Property = (props) => {
   const {offers, reviews, id, activeCity} = props;
   const nearOffers = offers.slice(0, 3);
 
-  const offer = offers.find((offerCurrent) => offerCurrent.id === Number(id));
+  const offer = offers.find((offerCurrent) => offerCurrent.id === Number(id) && offerCurrent.city === activeCity);
 
   return (
     <div className="page">
@@ -155,7 +155,7 @@ const Property = (props) => {
             className={`property__map`} />
         </section>
         <div className="container">
-          <OffersList offers = {nearOffers} />
+          <OffersList offers={nearOffers} />
         </div>
       </main>
     </div>
@@ -165,19 +165,7 @@ const Property = (props) => {
 Property.propTypes = {
   activeCity: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    bedroomsCount: PropTypes.number.isRequired,
-    guestsLimit: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    host: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired
-  })).isRequired,
+  offers: PropTypes.array.isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -189,6 +177,7 @@ Property.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  offers: state.currentCityOffers,
   activeCity: state.city,
 });
 
