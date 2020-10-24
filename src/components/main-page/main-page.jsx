@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from 'react-redux';
 import OffersList from "../offers-list/offers-list";
 import OfferMap from "../offer-map/offer-map";
+import CitiesList from "../cities-list/cities-list";
 
 const MainPage = (props) => {
-
-  const {offers} = props;
+  const {city, currentCityOffers} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -32,48 +33,12 @@ const MainPage = (props) => {
       </header>
 
       <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+        <CitiesList/>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {offers.length} places to stay in Amsterdam</b>
+              <b className="places__found"> {currentCityOffers.length} places to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -89,10 +54,10 @@ const MainPage = (props) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={offers} />
+              <OffersList offers={currentCityOffers} />
             </section>
             <div className="cities__right-section">
-              <OfferMap offers={offers} className={`cities__map`} />
+              <OfferMap offers={currentCityOffers} className={`cities__map`} />
             </div>
           </div>
         </div>
@@ -102,7 +67,14 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  offers: PropTypes.array.isRequired
+  city: PropTypes.string.isRequired,
+  currentCityOffers: PropTypes.array.isRequired
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  city: state.city,
+  currentCityOffers: state.currentCityOffers,
+});
+
+export {MainPage};
+export default connect(mapStateToProps)(MainPage);

@@ -26,7 +26,7 @@ class OfferMap extends PureComponent {
       marker: true
     });
 
-    this._map.setView(CitiesCoordinates.Amsterdam, ZOOM);
+    this._map.setView(CitiesCoordinates.AMSTERDAM, ZOOM);
 
     leaflet
   .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
