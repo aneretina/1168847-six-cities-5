@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {ZOOM, CitiesCoordinates, Icon, ID_MAP_CONTAINER} from "../../const.js";
@@ -11,11 +12,15 @@ class OfferMap extends PureComponent {
   }
 
   componentDidMount() {
-    const {offers} = this.props;
-    const offersLocations = offers.map((offer) => offer.location);
+    const {offers, offerId} = this.props;
 
     const icon = leaflet.icon({
       iconUrl: Icon.URL,
+      iconSize: Icon.SIZE
+    });
+
+    const activeIcon = leaflet.icon({
+      iconUrl: Icon.ACTIVE_URL,
       iconSize: Icon.SIZE
     });
 
@@ -35,11 +40,22 @@ class OfferMap extends PureComponent {
   .addTo(this._map);
 
 
-    offersLocations.forEach((location) => {
-      leaflet
-      .marker(location, {icon})
+    offers.forEach((offer) => {
+      if (offer.id === offerId) {
+        leaflet
+      .marker(offer.location, {icon: activeIcon})
       .addTo(this._map);
+      } else {
+        leaflet
+        .marker(offer.location, {icon})
+        .addTo(this._map);
+      }
     });
+  }
+
+  componentDidUpdate() {
+    this._map.remove();
+    this.componentDidMount();
   }
 
   render() {
@@ -51,8 +67,15 @@ class OfferMap extends PureComponent {
 }
 
 OfferMap.propTypes = {
+  offerId: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
 };
 
-export default OfferMap;
+const mapStateToProps = (state) => ({
+  offers: state.currentCityOffers,
+  offerId: state.activeOfferId
+});
+
+export {OfferMap};
+export default connect(mapStateToProps)(OfferMap);

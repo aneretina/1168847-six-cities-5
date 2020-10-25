@@ -21,6 +21,7 @@ export const CITIES = [
 
 export const Icon = {
   URL: `/img/pin.svg`,
+  ACTIVE_URL: `img/pin-active.svg`,
   SIZE: [30, 30],
 };
 
