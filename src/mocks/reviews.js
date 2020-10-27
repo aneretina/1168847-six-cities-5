@@ -13,7 +13,7 @@ export default [
   },
 
   {
-    id: 1,
+    id: 2,
     name: `Mary`,
     avatar: [`https://placeimg.com/640/480/people/101`,
       `https://placeimg.com/640/480/people/102`,

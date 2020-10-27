@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {ZOOM, CitiesCoordinates, Icon, ID_MAP_CONTAINER} from "../../const.js";
+import {ZOOM, Icon, ID_MAP_CONTAINER} from "../../const.js";
 
 class OfferMap extends PureComponent {
   constructor(props) {
@@ -13,6 +13,7 @@ class OfferMap extends PureComponent {
 
   componentDidMount() {
     const {offers, offerId} = this.props;
+    const cityCoordinates = offers[0].location;
 
     const icon = leaflet.icon({
       iconUrl: Icon.URL,
@@ -25,13 +26,12 @@ class OfferMap extends PureComponent {
     });
 
     this._map = leaflet.map(ID_MAP_CONTAINER, {
-      center: CitiesCoordinates.Amsterdam,
+      center: cityCoordinates,
       zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(CitiesCoordinates.AMSTERDAM, ZOOM);
 
     leaflet
   .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
