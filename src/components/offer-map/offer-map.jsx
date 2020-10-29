@@ -3,35 +3,35 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {ZOOM, Icon, ID_MAP_CONTAINER} from "../../const.js";
+import {ZOOM, Icon, ID_MAP_CONTAINER, CitiesCoordinates} from "../../const.js";
 
 class OfferMap extends PureComponent {
   constructor(props) {
     super(props);
     this._map = null;
-  }
-
-  componentDidMount() {
-    const {offers, offerId} = this.props;
-    const cityCoordinates = offers[0].location;
-
-    const icon = leaflet.icon({
+  
+    this.icon = leaflet.icon({
       iconUrl: Icon.URL,
       iconSize: Icon.SIZE
     });
 
-    const activeIcon = leaflet.icon({
+    this.activeIcon = leaflet.icon({
       iconUrl: Icon.ACTIVE_URL,
       iconSize: Icon.SIZE
     });
 
+    this._pins = [];
+  }
+
+  componentDidMount() {
+    const {offers, city} = this.props;
+
     this._map = leaflet.map(ID_MAP_CONTAINER, {
-      center: cityCoordinates,
+      center: CitiesCoordinates[city.toUpperCase()],
       zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
-
 
     leaflet
   .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -39,23 +39,31 @@ class OfferMap extends PureComponent {
   })
   .addTo(this._map);
 
+    this._addPins(offers);
+  }
 
+  _addPins() {
+    const {offerId, offers} = this.props;
     offers.forEach((offer) => {
-      if (offer.id === offerId) {
-        leaflet
-      .marker(offer.location, {icon: activeIcon})
-      .addTo(this._map);
-      } else {
-        leaflet
-        .marker(offer.location, {icon})
-        .addTo(this._map);
-      }
+      const pin = leaflet
+    .marker(offer.location, {icon: offer.id === offerId ? this.activeIcon : this.icon})
+    .addTo(this._map);
+      this._pins = [...this._pins, pin];
     });
   }
 
+
   componentDidUpdate() {
-    this._map.remove();
-    this.componentDidMount();
+    const {offers} = this.props;
+    this._removePins();
+    this._addPins(offers);
+  }
+
+  _removePins() {
+    this._pins.forEach((pin) => {
+      pin.removeFrom(this._map);
+    });
+    this._pins = [];
   }
 
   render() {
@@ -70,11 +78,13 @@ OfferMap.propTypes = {
   offerId: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   className: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.currentCityOffers,
-  offerId: state.activeOfferId
+  offerId: state.activeOfferId,
+  city: state.city
 });
 
 export {OfferMap};

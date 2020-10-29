@@ -37,13 +37,13 @@ export const SortOptions = {
 export const getSortedOffersByType = (offers, sortType) => {
   switch (sortType) {
     case SortOptions.POPULAR:
-      return offers.slice();
+      return offers;
     case SortOptions.PRICE_LOW_TO_HIGH:
-      return offers.slice().sort((a, b) => a.price - b.price);
+      return offers.sort((a, b) => a.price - b.price);
     case SortOptions.PRICE_HIGH_TO_LOW:
-      return offers.slice().sort((a, b) => b.price - a.price);
+      return offers.sort((a, b) => b.price - a.price);
     case SortOptions.TOP_RATED_FIRST:
-      return offers.slice().sort((a, b) => b.rating - a.rating);
+      return offers.sort((a, b) => b.rating - a.rating);
   }
   return offers;
 };
