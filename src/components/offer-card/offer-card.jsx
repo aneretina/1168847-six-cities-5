@@ -12,13 +12,9 @@ const OfferCard = (props) => {
     <article
       key={`${id}-${offer.name}`}
       className="cities__place-card place-card"
-      onMouseEnter={() => {
-        setActiveOfferId(id);
-      }}
+      onMouseEnter={setActiveOfferId}
 
-      onMouseLeave={() => {
-        resetActiveOfferId(id);
-      }}
+      onMouseLeave={resetActiveOfferId}
     >
       <div className="place-card__mark">
         {offer.isPremium ?
@@ -78,9 +74,9 @@ const mapStateToProps = (state) => ({
 });
 
 
-const mapDispatchToProps = (dispatch) => ({
-  setActiveOfferId(id) {
-    dispatch(ActionCreator.setActiveOfferId(id));
+const mapDispatchToProps = (dispatch, props) => ({
+  setActiveOfferId() {
+    dispatch(ActionCreator.setActiveOfferId(props.id));
   },
   resetActiveOfferId() {
     dispatch(ActionCreator.resetActiveOfferId());

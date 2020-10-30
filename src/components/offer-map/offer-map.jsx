@@ -9,8 +9,8 @@ class OfferMap extends PureComponent {
   constructor(props) {
     super(props);
     this._map = null;
-  
-    this.icon = leaflet.icon({
+
+    this.defaultIcon = leaflet.icon({
       iconUrl: Icon.URL,
       iconSize: Icon.SIZE
     });
@@ -20,7 +20,7 @@ class OfferMap extends PureComponent {
       iconSize: Icon.SIZE
     });
 
-    this._pins = [];
+    this._pins = new Map();
   }
 
   componentDidMount() {
@@ -42,28 +42,56 @@ class OfferMap extends PureComponent {
     this._addPins(offers);
   }
 
+  componentDidUpdate(prevProps) {
+    const {offers, city, offerId} = this.props;
+
+    if (city !== prevProps.city) {
+      this._removePins();
+      this._setView();
+    }
+
+    this._addPins(offers);
+
+    if (offerId !== prevProps.offerId) {
+      this._deactivateMapPin(prevProps.offerId);
+      this._activateMapPin(offerId);
+    }
+  }
+
   _addPins() {
     const {offerId, offers} = this.props;
     offers.forEach((offer) => {
       const pin = leaflet
-    .marker(offer.location, {icon: offer.id === offerId ? this.activeIcon : this.icon})
+    .marker(offer.location, {icon: this.defaultIcon})
     .addTo(this._map);
-      this._pins = [...this._pins, pin];
+      this._pins.set(offer.id, pin);
     });
+    this._activateMapPin(offerId);
   }
 
+  _activateMapPin(offerId) {
+    const marker = this._pins.get(offerId);
+    if (marker) {
+      marker.setIcon(this.activeIcon);
+    }
+  }
 
-  componentDidUpdate() {
-    const {offers} = this.props;
-    this._removePins();
-    this._addPins(offers);
+  _deactivateMapPin(offerId) {
+    const pin = this._pins.get(offerId);
+    if (pin) {
+      pin.setIcon(this.defaultIcon);
+    }
+  }
+
+  _setView() {
+    this._map.setView(CitiesCoordinates[this.props.city.toUpperCase()], ZOOM);
   }
 
   _removePins() {
     this._pins.forEach((pin) => {
       pin.removeFrom(this._map);
     });
-    this._pins = [];
+    this._pins.clear();
   }
 
   render() {
@@ -75,10 +103,10 @@ class OfferMap extends PureComponent {
 }
 
 OfferMap.propTypes = {
-  offerId: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   className: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
+  offerId: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
