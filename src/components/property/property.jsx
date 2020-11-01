@@ -6,6 +6,9 @@ import {Link} from 'react-router-dom';
 import NewCommentForm from "../new-comment-form/new-comment-form";
 import OfferMap from "../offer-map/offer-map";
 import OffersList from "../offers-list/offers-list";
+import withNewCommentForm from "../../hocs/with-new-comment-form/with-new-comment-form";
+
+const NewCommentFormWrapped = withNewCommentForm(NewCommentForm);
 
 const Property = (props) => {
   const {offers, reviews, id, activeCity} = props;
@@ -146,7 +149,7 @@ const Property = (props) => {
                     </li>
                   ))}
                 </ul>
-                <NewCommentForm></NewCommentForm>
+                <NewCommentFormWrapped />
               </section>
             </div>
           </div>

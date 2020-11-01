@@ -7,6 +7,9 @@ import OfferMap from "../offer-map/offer-map";
 import CitiesList from "../cities-list/cities-list";
 import Sorting from "../sorting/sorting";
 import {getSortedOffersByType} from "../../const";
+import withSorting from "../../hocs/with-sorting/with-sorting";
+
+const SortingWrapped = withSorting(Sorting);
 
 const MainPage = (props) => {
   const {city, currentCityOffers, sort, onChangeSort} = props;
@@ -44,13 +47,13 @@ const MainPage = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found"> {currentCityOffers.length} places to stay in {city}</b>
-              <Sorting
+              <SortingWrapped
                 currentSort={sort}
                 onChangeSort={onChangeSort}/>
               <OffersList offers={sortedOffers}/>
             </section>
             <div className="cities__right-section">
-              <OfferMap offers={currentCityOffers} className={`cities__map`} />
+              <OfferMap className={`cities__map`} />
             </div>
           </div>
         </div>
