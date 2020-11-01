@@ -1,19 +1,20 @@
 import React from 'react';
+import {ActionCreator} from "../../store/action";
+import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 const OfferCard = (props) => {
-  const {offer, id, onHoverOffer} = props;
+  const {offer, id, setActiveOfferId, resetActiveOfferId} = props;
   const offerLink = `offer/` + id;
 
   return (
     <article
       key={`${id}-${offer.name}`}
       className="cities__place-card place-card"
-      onMouseOver={(evt) => {
-        evt.preventDefault();
-        onHoverOffer(id);
-      }}
+      onMouseEnter={setActiveOfferId}
+
+      onMouseLeave={resetActiveOfferId}
     >
       <div className="place-card__mark">
         {offer.isPremium ?
@@ -57,7 +58,8 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   id: PropTypes.number.isRequired,
-  onHoverOffer: PropTypes.func.isRequired,
+  setActiveOfferId: PropTypes.func.isRequired,
+  resetActiveOfferId: PropTypes.func.isRequired,
   offer: PropTypes.shape({
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -67,5 +69,19 @@ OfferCard.propTypes = {
   }).isRequired
 };
 
+const mapStateToProps = (state) => ({
+  activeOfferId: state.activeOfferId,
+});
 
-export default OfferCard;
+
+const mapDispatchToProps = (dispatch, props) => ({
+  setActiveOfferId() {
+    dispatch(ActionCreator.setActiveOfferId(props.id));
+  },
+  resetActiveOfferId() {
+    dispatch(ActionCreator.resetActiveOfferId());
+  }
+});
+
+export {OfferCard};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
