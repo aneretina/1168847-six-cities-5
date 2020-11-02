@@ -5,11 +5,9 @@ import {ActionCreator} from "../../store/action";
 import OffersList from "../offers-list/offers-list";
 import OfferMap from "../offer-map/offer-map";
 import CitiesList from "../cities-list/cities-list";
-import Sorting from "../sorting/sorting";
 import {getSortedOffersByType} from "../../const";
-import withSorting from "../../hocs/with-sorting/with-sorting";
+import {SortingWrapped} from "../sorting/sorting";
 
-const SortingWrapped = withSorting(Sorting);
 
 const MainPage = (props) => {
   const {city, currentCityOffers, sort, onChangeSort} = props;

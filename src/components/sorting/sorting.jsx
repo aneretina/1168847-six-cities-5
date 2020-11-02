@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {SortOptions} from '../../const';
+import withSorting from '../../hocs/with-sorting/with-sorting';
 
 const Sorting = (props) => {
 
@@ -52,6 +53,6 @@ Sorting.propTypes = {
 };
 
 
-export default Sorting;
+export const SortingWrapped = withSorting(Sorting);
 
 

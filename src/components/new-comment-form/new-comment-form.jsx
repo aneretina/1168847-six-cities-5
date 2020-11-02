@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import withNewCommentForm from "../../hocs/with-new-comment-form/with-new-comment-form";
 
 const NewCommentForm = (props) => {
 
@@ -98,4 +99,4 @@ NewCommentForm.propTypes = {
   rating: PropTypes.string.isRequired,
 };
 
-export default NewCommentForm;
+export const NewCommentFormWrapped = withNewCommentForm(NewCommentForm);
