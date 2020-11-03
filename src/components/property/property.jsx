@@ -3,9 +3,10 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import Moment from 'react-moment';
 import {Link} from 'react-router-dom';
-import NewCommentForm from "../new-comment-form/new-comment-form";
 import OfferMap from "../offer-map/offer-map";
 import OffersList from "../offers-list/offers-list";
+import {NewCommentFormWrapped} from "../new-comment-form/new-comment-form";
+
 
 const Property = (props) => {
   const {offers, reviews, id, activeCity} = props;
@@ -146,7 +147,7 @@ const Property = (props) => {
                     </li>
                   ))}
                 </ul>
-                <NewCommentForm></NewCommentForm>
+                <NewCommentFormWrapped />
               </section>
             </div>
           </div>

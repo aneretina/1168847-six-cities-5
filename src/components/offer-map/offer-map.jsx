@@ -58,6 +58,13 @@ class OfferMap extends PureComponent {
     }
   }
 
+  render() {
+    const {className} = this.props;
+    return (
+      <section className={`map ${className}`} id="map"></section>
+    );
+  }
+
   _addPins() {
     const {offerId, offers} = this.props;
     offers.forEach((offer) => {
@@ -92,13 +99,6 @@ class OfferMap extends PureComponent {
       pin.removeFrom(this._map);
     });
     this._pins.clear();
-  }
-
-  render() {
-    const {className} = this.props;
-    return (
-      <section className={`map ${className}`} id="map"></section>
-    );
   }
 }
 

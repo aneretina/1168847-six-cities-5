@@ -13,7 +13,6 @@ const OfferCard = (props) => {
       key={`${id}-${offer.name}`}
       className="cities__place-card place-card"
       onMouseEnter={setActiveOfferId}
-
       onMouseLeave={resetActiveOfferId}
     >
       <div className="place-card__mark">
