@@ -1,19 +1,19 @@
 import React from 'react';
-import {ActionCreator} from "../../store/action";
+import {setActiveOfferId, resetActiveOfferId} from "../../store/action";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 const OfferCard = (props) => {
-  const {offer, id, setActiveOfferId, resetActiveOfferId} = props;
+  const {offer, id, setActiveOfferIdAction, resetActiveOfferIdAction} = props;
   const offerLink = `offer/` + id;
 
   return (
     <article
       key={`${id}-${offer.name}`}
       className="cities__place-card place-card"
-      onMouseEnter={setActiveOfferId}
-      onMouseLeave={resetActiveOfferId}
+      onMouseEnter={setActiveOfferIdAction}
+      onMouseLeave={resetActiveOfferIdAction}
     >
       <div className="place-card__mark">
         {offer.isPremium ?
@@ -57,8 +57,8 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   id: PropTypes.number.isRequired,
-  setActiveOfferId: PropTypes.func.isRequired,
-  resetActiveOfferId: PropTypes.func.isRequired,
+  setActiveOfferIdAction: PropTypes.func.isRequired,
+  resetActiveOfferIdAction: PropTypes.func.isRequired,
   offer: PropTypes.shape({
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -74,11 +74,11 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = (dispatch, props) => ({
-  setActiveOfferId() {
-    dispatch(ActionCreator.setActiveOfferId(props.id));
+  setActiveOfferIdAction() {
+    dispatch(setActiveOfferId(props.id));
   },
-  resetActiveOfferId() {
-    dispatch(ActionCreator.resetActiveOfferId());
+  resetActiveOfferIdAction() {
+    dispatch(resetActiveOfferId());
   }
 });
 

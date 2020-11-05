@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
-import {ActionCreator} from "../../store/action";
+import {changeSortOptions} from "../../store/action";
 import OffersList from "../offers-list/offers-list";
 import OfferMap from "../offer-map/offer-map";
 import CitiesList from "../cities-list/cities-list";
@@ -79,7 +79,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeSort(currentSort) {
-    dispatch(ActionCreator.changeSortOptions(currentSort));
+    dispatch(changeSortOptions(currentSort));
   },
 });
 
