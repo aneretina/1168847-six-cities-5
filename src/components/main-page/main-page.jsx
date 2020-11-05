@@ -6,7 +6,8 @@ import OffersList from "../offers-list/offers-list";
 import OfferMap from "../offer-map/offer-map";
 import CitiesList from "../cities-list/cities-list";
 import {getSortedOffersByType} from "../../const";
-import {SortingWrapped} from "../sorting/sorting";
+import Sorting from "../sorting/sorting";
+import MainEmpty from "../main-empty/main-empty";
 
 
 const MainPage = (props) => {
@@ -38,18 +39,21 @@ const MainPage = (props) => {
         </div>
       </header>
 
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index${!currentCityOffers.length ? ` page__main--index-empty` : ``}`}>
         <CitiesList/>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {currentCityOffers.length} places to stay in {city}</b>
-              <SortingWrapped
-                currentSort={sort}
-                onChangeSort={onChangeSort}/>
-              <OffersList offers={sortedOffers}/>
-            </section>
+          <div className={`cities__places-container${!currentCityOffers.length ? ` cities__places-container--empty` : ``} container`}>
+            {currentCityOffers.length ?
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found"> {currentCityOffers.length} places to stay in {city}</b>
+                <Sorting
+                  currentSort={sort}
+                  onChangeSort={onChangeSort}/>
+                <OffersList offers={sortedOffers}/>
+              </section>
+              : <MainEmpty city={city} />
+            }
             <div className="cities__right-section">
               <OfferMap className={`cities__map`} />
             </div>

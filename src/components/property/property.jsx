@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import {Link} from 'react-router-dom';
 import OfferMap from "../offer-map/offer-map";
 import OffersList from "../offers-list/offers-list";
-import {NewCommentFormWrapped} from "../new-comment-form/new-comment-form";
+import NewCommentForm from "../new-comment-form/new-comment-form";
 
 
 const Property = (props) => {
@@ -147,7 +147,7 @@ const Property = (props) => {
                     </li>
                   ))}
                 </ul>
-                <NewCommentFormWrapped />
+                <NewCommentForm />
               </section>
             </div>
           </div>

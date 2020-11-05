@@ -52,7 +52,7 @@ Sorting.propTypes = {
   onChangeSort: PropTypes.func.isRequired
 };
 
-
-export const SortingWrapped = withSorting(Sorting);
+export {Sorting};
+export default withSorting(Sorting);
 
 

@@ -99,4 +99,5 @@ NewCommentForm.propTypes = {
   rating: PropTypes.string.isRequired,
 };
 
-export const NewCommentFormWrapped = withNewCommentForm(NewCommentForm);
+export {NewCommentForm};
+export default withNewCommentForm(NewCommentForm);
