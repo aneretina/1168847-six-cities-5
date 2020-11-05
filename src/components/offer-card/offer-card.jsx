@@ -3,6 +3,7 @@ import {setActiveOfferId, resetActiveOfferId} from "../../store/action";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {getActiveOfferId} from '../../store/selectors/selectors';
 
 const OfferCard = (props) => {
   const {offer, id, setActiveOfferIdAction, resetActiveOfferIdAction} = props;
@@ -69,7 +70,7 @@ OfferCard.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeOfferId: state.activeOfferId,
+  activeOfferId: getActiveOfferId(state),
 });
 
 

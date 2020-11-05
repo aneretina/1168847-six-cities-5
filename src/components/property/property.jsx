@@ -177,9 +177,9 @@ Property.propTypes = {
   })).isRequired
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.currentCityOffers,
-  activeCity: state.city,
+const mapStateToProps = (PROCESS) => ({
+  offers: PROCESS.currentCityOffers,
+  activeCity: PROCESS.city,
 });
 
 export {Property};

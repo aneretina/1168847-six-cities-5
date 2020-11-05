@@ -8,6 +8,7 @@ import Property from "../property/property";
 
 const App = (props) => {
   const {reviews} = props;
+
   return (
     <BrowserRouter>
       <Switch>

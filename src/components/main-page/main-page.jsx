@@ -8,6 +8,7 @@ import CitiesList from "../cities-list/cities-list";
 import {getSortedOffersByType} from "../../const";
 import Sorting from "../sorting/sorting";
 import MainEmpty from "../main-empty/main-empty";
+import {getCurrentCity, getCurrentCityOffers, getCurrentSort} from "../../store/selectors/selectors";
 
 
 const MainPage = (props) => {
@@ -72,9 +73,9 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
-  currentCityOffers: state.currentCityOffers,
-  sort: state.currentSort,
+  city: getCurrentCity(state),
+  currentCityOffers: getCurrentCityOffers(state),
+  sort: getCurrentSort(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

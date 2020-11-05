@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {ZOOM, Icon, ID_MAP_CONTAINER, CitiesCoordinates} from "../../const.js";
+import {getCurrentCityOffers, getActiveOfferId, getCurrentCity} from '../../store/selectors/selectors.js';
 
 class OfferMap extends PureComponent {
   constructor(props) {
@@ -110,9 +111,9 @@ OfferMap.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.currentCityOffers,
-  offerId: state.activeOfferId,
-  city: state.city
+  offers: getCurrentCityOffers(state),
+  offerId: getActiveOfferId(state),
+  city: getCurrentCity(state)
 });
 
 export {OfferMap};

@@ -5,7 +5,8 @@ export const ActionType = {
   RESET_ACTIVE_OFFER_ID: `SET_ACTIVE_OFFER_ID`,
   CHANGE_SORT_OPTIONS: `CHANGE_SORT_OPTIONS`,
   CHANGE_OFFERS_BY_SORT: `CHANGE_OFFERS_BY_SORT`,
-  LOAD_OFFERS: `LOAD_OFFERS`
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`
 };
 
 export const changeCity = (city) => ({
@@ -37,7 +38,12 @@ export const changeOffersBySort = (sortType) => ({
   payload: sortType,
 });
 
-export const loadHotels = (hotels) => ({
+export const loadOffers = (offers) => ({
   type: ActionType.LOAD_OFFERS,
-  payload: hotels,
+  payload: offers,
+});
+
+export const requireAuthorization = (status) => ({
+  type: ActionType.REQUIRED_AUTHORIZATION,
+  payload: status
 });

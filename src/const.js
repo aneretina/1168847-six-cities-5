@@ -47,3 +47,8 @@ export const getSortedOffersByType = (offers, sortType) => {
   }
   return offers;
 };
+
+export const AuthorizationStatus = {
+  NOT_AUTHORIZED: `NOT_AUTHORIZED`,
+  AUTHORIZED: `AUTHORIZED`,
+};
