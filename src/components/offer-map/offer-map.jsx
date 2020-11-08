@@ -62,15 +62,16 @@ class OfferMap extends PureComponent {
   render() {
     const {className} = this.props;
     return (
-      <section className={`map ${className}`} id="map"></section>
+      <section className={`map ${className}`} style={{width: `512px`, height: `512px`, margin: `30px auto 0px`}} id="map"></section>
     );
   }
 
   _addPins() {
     const {offerId, offers} = this.props;
+
     offers.forEach((offer) => {
       const pin = leaflet
-    .marker(offer.location, {icon: this.defaultIcon})
+    .marker([offer.location.latitude, offer.location.longitude], {icon: this.defaultIcon})
     .addTo(this._map);
       this._pins.set(offer.id, pin);
     });

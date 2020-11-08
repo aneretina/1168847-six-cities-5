@@ -5,10 +5,10 @@ import {changeSortOptions} from "../../store/action";
 import OffersList from "../offers-list/offers-list";
 import OfferMap from "../offer-map/offer-map";
 import CitiesList from "../cities-list/cities-list";
-import {getSortedOffersByType} from "../../const";
 import Sorting from "../sorting/sorting";
 import MainEmpty from "../main-empty/main-empty";
 import {getCurrentCity, getCurrentCityOffers, getCurrentSort} from "../../store/selectors/selectors";
+import {getSortedOffersByType} from "../../utils";
 
 
 const MainPage = (props) => {

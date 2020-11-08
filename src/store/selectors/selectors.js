@@ -4,9 +4,11 @@ import {NameSpace} from '../reducers/root-reducer';
 
 export const getOffers = (state) => state[NameSpace.DATA].offers;
 export const getCurrentSort = (state) => state[NameSpace.PROCESS].currentSort;
-export const getCurrentCity = (state) => state[NameSpace.PROCESS].city;
 export const getCitiesList = (state) => state[NameSpace.PROCESS].cities;
 export const getActiveOfferId = (state) => state[NameSpace.PROCESS].activeOfferId;
+export const getCurrentCity = (state) => state[NameSpace.PROCESS].city;
+
+export const getAuthorizationStatus = (state) => state[NameSpace.USER].authorizationStatus;
 
 
 export const getCurrentCityOffers = createSelector(

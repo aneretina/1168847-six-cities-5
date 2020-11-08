@@ -1,5 +1,7 @@
 export const ZOOM = 12;
 
+export const TO_PERCENT = 20;
+
 export const CitiesCoordinates = {
   AMSTERDAM: [52.38333, 4.9],
   PARIS: [48.864716, 2.349014],
@@ -32,20 +34,6 @@ export const SortOptions = {
   PRICE_LOW_TO_HIGH: `Price: low to high`,
   PRICE_HIGH_TO_LOW: `Price: high to low`,
   TOP_RATED_FIRST: `Top rated first`
-};
-
-export const getSortedOffersByType = (offers, sortType) => {
-  switch (sortType) {
-    case SortOptions.POPULAR:
-      return offers;
-    case SortOptions.PRICE_LOW_TO_HIGH:
-      return offers.sort((a, b) => a.price - b.price);
-    case SortOptions.PRICE_HIGH_TO_LOW:
-      return offers.sort((a, b) => b.price - a.price);
-    case SortOptions.TOP_RATED_FIRST:
-      return offers.sort((a, b) => b.rating - a.rating);
-  }
-  return offers;
 };
 
 export const AuthorizationStatus = {

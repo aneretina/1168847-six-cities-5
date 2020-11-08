@@ -6,7 +6,8 @@ export const ActionType = {
   CHANGE_SORT_OPTIONS: `CHANGE_SORT_OPTIONS`,
   CHANGE_OFFERS_BY_SORT: `CHANGE_OFFERS_BY_SORT`,
   LOAD_OFFERS: `LOAD_OFFERS`,
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
 export const changeCity = (city) => ({
@@ -46,4 +47,9 @@ export const loadOffers = (offers) => ({
 export const requireAuthorization = (status) => ({
   type: ActionType.REQUIRED_AUTHORIZATION,
   payload: status
+});
+
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
 });

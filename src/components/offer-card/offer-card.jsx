@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {getActiveOfferId} from '../../store/selectors/selectors';
+import offerProp from './offer.prop';
+import {TO_PERCENT} from '../../const';
 
 const OfferCard = (props) => {
   const {offer, id, setActiveOfferIdAction, resetActiveOfferIdAction} = props;
@@ -11,7 +13,6 @@ const OfferCard = (props) => {
 
   return (
     <article
-      key={`${id}-${offer.name}`}
       className="cities__place-card place-card"
       onMouseEnter={setActiveOfferIdAction}
       onMouseLeave={resetActiveOfferIdAction}
@@ -25,7 +26,7 @@ const OfferCard = (props) => {
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={offerLink}>
-          <img className="place-card__image" src={offer.images[0]} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image"/>
         </Link>
       </div>
       <div className="place-card__info">
@@ -43,12 +44,12 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}}></span>
+            <span style={{width: offer.rating * TO_PERCENT + `%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={offerLink}>{offer.name}</Link>
+          <Link to={offerLink}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
@@ -60,13 +61,7 @@ OfferCard.propTypes = {
   id: PropTypes.number.isRequired,
   setActiveOfferIdAction: PropTypes.func.isRequired,
   resetActiveOfferIdAction: PropTypes.func.isRequired,
-  offer: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-  }).isRequired
+  offer: offerProp,
 };
 
 const mapStateToProps = (state) => ({

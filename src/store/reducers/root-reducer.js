@@ -12,6 +12,6 @@ export const NameSpace = {
 
 export default combineReducers({
   [NameSpace.DATA]: loadData,
-  [NameSpace.OFFER_PAGE]: processApp,
+  [NameSpace.PROCESS]: processApp,
   [NameSpace.USER]: user,
 });

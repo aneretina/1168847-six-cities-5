@@ -7,28 +7,32 @@ import {Provider} from 'react-redux';
 import App from "./components/app/app";
 import reviews from "./mocks/reviews";
 import {composeWithDevTools} from 'redux-devtools-extension';
-import {fetchOffersList} from "./store/api-actions";
+import {fetchOffersList, checkAuth} from "./store/api-actions";
 import {requireAuthorization} from "./store/action";
 import {AuthorizationStatus} from "./const";
 import rootReducer from "./store/reducers/root-reducer";
+import {redirect} from './store/middlewares/redirect';
 
 const api = createApi(() => store.dispatch(requireAuthorization(AuthorizationStatus.NOT_AUTHORIZED)));
 
 
 const store = createStore(rootReducer,
     composeWithDevTools(
-        applyMiddleware(
-            thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     ));
 
-store.dispatch(fetchOffersList());
-
-
-ReactDOM.render(
-    <Provider store={store}>
-      <App
-        reviews={reviews}
-      />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+Promise.all([
+  store.dispatch(fetchOffersList()),
+  store.dispatch(checkAuth()),
+])
+.then(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App
+          reviews={reviews}
+        />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+});

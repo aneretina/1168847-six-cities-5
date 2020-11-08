@@ -6,13 +6,16 @@ import {Link} from 'react-router-dom';
 import OfferMap from "../offer-map/offer-map";
 import OffersList from "../offers-list/offers-list";
 import NewCommentForm from "../new-comment-form/new-comment-form";
+import {getCurrentCityOffers, getCurrentCity, getActiveOfferId} from "../../store/selectors/selectors";
 
 
 const Property = (props) => {
   const {offers, reviews, id, activeCity} = props;
-  const nearOffers = offers.slice(0, 3);
+  const offer = offers.find((offerCurrent) => {
+    return offerCurrent.id === +id;
+  });
 
-  const offer = offers.find((offerCurrent) => offerCurrent.id === Number(id) && offerCurrent.city === activeCity);
+  const nearOffers = offers.slice(0, 3);
 
   return (
     <div className="page">
@@ -43,9 +46,9 @@ const Property = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.images.map((img, i) => (
+              {offer.pictures.map((img, i) => (
                 <div key={i} className="property__image-wrapper">
-                  <img className="property__image" src={img} alt={offer.name}/>
+                  <img className="property__image" src={img} alt={offer.title}/>
                 </div>
               ))}
             </div>
@@ -95,7 +98,7 @@ const Property = (props) => {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {offer.features.map((feature, index) => {
+                  {offer.goods.map((feature, index) => {
                     return (
                       <li key={index} className="property__inside-item">
                         {feature}
@@ -177,9 +180,10 @@ Property.propTypes = {
   })).isRequired
 };
 
-const mapStateToProps = (PROCESS) => ({
-  offers: PROCESS.currentCityOffers,
-  activeCity: PROCESS.city,
+const mapStateToProps = (state) => ({
+  offers: getCurrentCityOffers(state),
+  activeCity: getCurrentCity(state),
+  id: getActiveOfferId(state)
 });
 
 export {Property};

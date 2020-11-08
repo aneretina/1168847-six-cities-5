@@ -5,11 +5,11 @@ import {ActionType} from "../../action";
 
 
 const initialState = {
-  city: CITIES[0],
   currentCityOffers: [].filter((offer) => offer.city === CITIES[0]),
   cities: CITIES,
   activeOfferId: -1,
   currentSort: SortOptions.POPULAR,
+  city: CITIES[0],
 };
 
 const processApp = (state = initialState, action) => {
