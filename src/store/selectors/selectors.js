@@ -8,6 +8,7 @@ export const getCitiesList = (state) => state[NameSpace.PROCESS].cities;
 export const getActiveOfferId = (state) => state[NameSpace.PROCESS].activeOfferId;
 export const getCurrentCity = (state) => state[NameSpace.PROCESS].city;
 
+export const getUserInfo = (state) => state[NameSpace.USER].userEmail;
 export const getAuthorizationStatus = (state) => state[NameSpace.USER].authorizationStatus;
 
 

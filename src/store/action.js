@@ -8,6 +8,7 @@ export const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  LOAD_LOGGED_INFO: `LOAD_LOGGED_INFO`
 };
 
 export const changeCity = (city) => ({
@@ -52,4 +53,9 @@ export const requireAuthorization = (status) => ({
 export const redirectToRoute = (url) => ({
   type: ActionType.REDIRECT_TO_ROUTE,
   payload: url,
+});
+
+export const setLoggedUser = (email) => ({
+  type: ActionType.LOAD_LOGGED_INFO,
+  payload: email,
 });

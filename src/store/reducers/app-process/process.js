@@ -1,6 +1,6 @@
 
 import {CITIES, SortOptions} from "../../../const";
-import {extend} from "../../../utils";
+import {extend, getSortedOffersByType} from "../../../utils";
 import {ActionType} from "../../action";
 
 
@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const processApp = (state = initialState, action) => {
-  // const offersFilteredByCity = [].filter((offer) => offer.city === state.city);
+  const offersFilteredByCity = [].filter((offer) => offer.city === state.city);
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
@@ -27,24 +27,24 @@ const processApp = (state = initialState, action) => {
       return extend(state, {
         activeOfferId: action.payload,
       });
-    // case ActionType.GET_OFFERS_LIST:
-      // return extend(state, {
-      // currentCityOffers: offersFilteredByCity,
-      // });
+    case ActionType.GET_OFFERS_LIST:
+      return extend(state, {
+        currentCityOffers: offersFilteredByCity,
+      });
     case ActionType.CHANGE_SORT_OPTIONS:
       return extend(state, {
         currentSort: action.payload,
       });
 
-    // case ActionType.CHANGE_OFFERS_BY_SORT:
-      // if (action.changeSortOptions === initialState.currentSort) {
-        // return extend(state, {
-          // currentCityOffers: offersFilteredByCity,
-        // });
-     // }
-      // return extend(state, {
-        // currentOffers: getSortedOffersByType(state.currentOffers, action.changeSortOptions),
-      // });
+    case ActionType.CHANGE_OFFERS_BY_SORT:
+      if (action.changeSortOptions === initialState.currentSort) {
+        return extend(state, {
+          currentCityOffers: offersFilteredByCity,
+        });
+      }
+      return extend(state, {
+        currentOffers: getSortedOffersByType(state.currentOffers, action.changeSortOptions),
+      });
   }
   return state;
 };

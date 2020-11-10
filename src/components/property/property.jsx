@@ -2,51 +2,29 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import Moment from 'react-moment';
-import {Link} from 'react-router-dom';
 import OfferMap from "../offer-map/offer-map";
 import OffersList from "../offers-list/offers-list";
 import NewCommentForm from "../new-comment-form/new-comment-form";
-import {getCurrentCityOffers, getCurrentCity, getActiveOfferId} from "../../store/selectors/selectors";
+import {getCurrentCityOffers, getCurrentCity} from "../../store/selectors/selectors";
+import Header from "../ header/header";
+import {TO_PERCENT} from "../../const";
 
 
 const Property = (props) => {
   const {offers, reviews, id, activeCity} = props;
-  const offer = offers.find((offerCurrent) => {
-    return offerCurrent.id === +id;
-  });
 
-  const nearOffers = offers.slice(0, 3);
-
+  const offer = offers.find((offerCurrent) => offerCurrent.id === +id);
+  const picturesForShow = offer.pictures.slice(0, 6);
+  const offersCity = offers.filter((offerItem) => offerItem.activeCity === offer.activeCity);
+  const offersNear = offersCity.filter((offerCurrent) => offerCurrent.id !== offer.id).slice(0, 3);
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link className="header__logo-link" to="/">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </Link>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.pictures.map((img, i) => (
+              {picturesForShow.map((img, i) => (
                 <div key={i} className="property__image-wrapper">
                   <img className="property__image" src={img} alt={offer.title}/>
                 </div>
@@ -64,7 +42,7 @@ const Property = (props) => {
               </div>
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  {offer.name}
+                  {offer.title}
                 </h1>
                 <button className="property__bookmark-button button" type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
@@ -75,7 +53,7 @@ const Property = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `80%`}}></span>
+                  <span style={{width: offer.rating * TO_PERCENT + `%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{offer.rating}</span>
@@ -85,10 +63,10 @@ const Property = (props) => {
                   {offer.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {offer.bedroomsCount}
+                  {offer.bedroomsCount} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  {offer.guestsLimit}
+                  {offer.guestsLimit} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -109,11 +87,11 @@ const Property = (props) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
+                  <div className={`property__avatar-wrapper ${offer.host.isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
+                    <img className="property__avatar user__avatar" src={offer.host.avatar} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">
-                    {offer.host}
+                    {offer.host.name}
                   </span>
                 </div>
                 <div className="property__description">
@@ -122,44 +100,28 @@ const Property = (props) => {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ul className="reviews__list">
-                  {reviews.map((review, i) => (
-                    <li key={i} className="reviews__item">
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
-                        </div>
-                        <span className="reviews__user-name">
-                          {review.name}
-                        </span>
-                      </div>
-                      <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{width: `80%`}}></span>
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
-                        <p className="reviews__text">
-                          {review.text}
-                        </p>
-                        <Moment className="reviews__time" date={review.date} format="MMMM/DD">
-                          {review.date}
-                        </Moment>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
                 <NewCommentForm />
               </section>
             </div>
           </div>
-          <OfferMap offers={nearOffers}
+          <OfferMap offers={offersNear}
             activeCity={activeCity}
+            cityCoords={[offersNear[0].city.location.latitude, offersNear[0].city.location.longitude]}
+            zoom={offersNear[0].city.location.zoom}
             className={`property__map`} />
         </section>
         <div className="container">
-          <OffersList offers={nearOffers} />
+          <section className="near-places places">
+            {offersNear.length > 0 &&
+              <>
+                <h2 className="near-places__title">Other places in the neighbourhood</h2>
+
+                <OffersList offers={offersNear}
+                  className={`near-places__list`} />
+              </>
+            }
+          </section>
+
         </div>
       </main>
     </div>
@@ -183,7 +145,6 @@ Property.propTypes = {
 const mapStateToProps = (state) => ({
   offers: getCurrentCityOffers(state),
   activeCity: getCurrentCity(state),
-  id: getActiveOfferId(state)
 });
 
 export {Property};

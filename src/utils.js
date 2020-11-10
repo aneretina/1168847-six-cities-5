@@ -45,8 +45,8 @@ export const adaptOffer = (offer) => {
     type: offer[`type`],
     rating: offer[`rating`],
     description: offer[`description`],
-    bedroomsMax: offer[`bedrooms`],
-    guestsMax: offer[`max_adults`],
+    bedroomsCount: offer[`bedrooms`],
+    guestsLimit: offer[`max_adults`],
     goods: offer[`goods`],
     host: {
       avatar: offer[`host`][`avatar_url`],

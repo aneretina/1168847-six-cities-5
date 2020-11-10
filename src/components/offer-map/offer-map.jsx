@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {ZOOM, Icon, ID_MAP_CONTAINER, CitiesCoordinates} from "../../const.js";
+import {Icon, ID_MAP_CONTAINER} from "../../const.js";
 import {getCurrentCityOffers, getActiveOfferId, getCurrentCity} from '../../store/selectors/selectors.js';
 
 class OfferMap extends PureComponent {
@@ -25,11 +25,11 @@ class OfferMap extends PureComponent {
   }
 
   componentDidMount() {
-    const {offers, city} = this.props;
+    const {offers, cityCoords, zoom} = this.props;
 
     this._map = leaflet.map(ID_MAP_CONTAINER, {
-      center: CitiesCoordinates[city.toUpperCase()],
-      zoom: ZOOM,
+      center: cityCoords,
+      zoom,
       zoomControl: false,
       marker: true
     });
@@ -62,7 +62,7 @@ class OfferMap extends PureComponent {
   render() {
     const {className} = this.props;
     return (
-      <section className={`map ${className}`} style={{width: `512px`, height: `512px`, margin: `30px auto 0px`}} id="map"></section>
+      <section className={`map ${className}`} id="map"></section>
     );
   }
 
@@ -93,7 +93,7 @@ class OfferMap extends PureComponent {
   }
 
   _setView() {
-    this._map.setView(CitiesCoordinates[this.props.city.toUpperCase()], ZOOM);
+    this._map.setView(this.props.cityCoords, this.props.zoom);
   }
 
   _removePins() {
@@ -108,7 +108,9 @@ OfferMap.propTypes = {
   offers: PropTypes.array.isRequired,
   className: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
-  offerId: PropTypes.number.isRequired
+  offerId: PropTypes.number.isRequired,
+  cityCoords: PropTypes.arrayOf(PropTypes.number).isRequired,
+  zoom: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
