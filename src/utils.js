@@ -39,7 +39,7 @@ export const adaptOffer = (offer) => {
     pictures: offer[`images`],
     previewImage: offer[`preview_image`],
     isPremium: offer[`is_premium`],
-    isFavourite: offer[`is_favourite`],
+    isFavorite: offer[`is_favorite`],
     price: offer[`price`],
     title: offer[`title`],
     type: offer[`type`],
@@ -53,6 +53,6 @@ export const adaptOffer = (offer) => {
       name: offer[`host`][`name`],
       isPro: offer[`host`][`is_pro`],
     },
-    nearOffers: []
+    offersNear: []
   };
 };

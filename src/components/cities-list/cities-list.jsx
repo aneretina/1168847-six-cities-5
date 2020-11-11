@@ -13,7 +13,7 @@ const CitiesList = (props) => {
         <section className="locations container">
           <ul className="locations__list tabs__list">
             {cities.map((item, index) => (
-              <li key={`city-${index}`}
+              <li key={`${item}-${index}`}
                 className="locations__item"
                 onClick={(evt) => {
                   evt.preventDefault();

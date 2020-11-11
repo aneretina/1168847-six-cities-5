@@ -8,7 +8,10 @@ export const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
-  LOAD_LOGGED_INFO: `LOAD_LOGGED_INFO`
+  LOAD_LOGGED_INFO: `LOAD_LOGGED_INFO`,
+  LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
+  CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
+  LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
 };
 
 export const changeCity = (city) => ({
@@ -58,4 +61,20 @@ export const redirectToRoute = (url) => ({
 export const setLoggedUser = (email) => ({
   type: ActionType.LOAD_LOGGED_INFO,
   payload: email,
+});
+
+export const loadFavoriteOffers = (favoriteOffers) => ({
+  type: ActionType.LOAD_FAVORITE_OFFERS,
+  payload: favoriteOffers
+});
+
+
+export const changeFavoriteStatus = (id, status) => ({
+  type: ActionType.CHANGE_FAVORITE_STATUS,
+  payload: id, status,
+});
+
+export const loadNearOffers = (nearOffers) => ({
+  type: ActionType.LOAD_NEAR_OFFERS,
+  payload: nearOffers,
 });

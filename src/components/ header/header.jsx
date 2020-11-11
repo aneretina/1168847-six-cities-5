@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getAuthorizationStatus, getUserInfo} from '../../store/selectors/selectors';
+import {getAuthorizationStatus, getEmail} from '../../store/selectors/selectors';
 import {AuthorizationStatus} from '../../const';
 
 
 const Header = (props) => {
-
-  const {isAuthorized} = props;
-  const userEmail = localStorage.getItem(`login`);
+  const {isAuthorized, email} = props;
 
   return (
     <header className="header">
@@ -27,7 +25,7 @@ const Header = (props) => {
                   to={isAuthorized === AuthorizationStatus.AUTHORIZED ? `/favorites` : `/login`}>
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   <span className="header__user-name user__name"
-                  >{isAuthorized ? userEmail : `Sign in`}</span>
+                  >{isAuthorized ? email : `Sign in`}</span>
                 </Link>
               </li>
             </ul>
@@ -42,13 +40,13 @@ const Header = (props) => {
 Header.propTypes = {
   type: PropTypes.string,
   isAuthorized: PropTypes.string.isRequired,
-  userEmail: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     isAuthorized: getAuthorizationStatus(state),
-    userEmail: getUserInfo(state),
+    email: getEmail(state),
   };
 };
 

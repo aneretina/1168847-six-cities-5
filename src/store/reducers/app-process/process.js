@@ -10,6 +10,8 @@ const initialState = {
   activeOfferId: -1,
   currentSort: SortOptions.POPULAR,
   city: CITIES[0],
+  nearOffers: [],
+  favoriteOffers: []
 };
 
 const processApp = (state = initialState, action) => {
@@ -45,7 +47,19 @@ const processApp = (state = initialState, action) => {
       return extend(state, {
         currentOffers: getSortedOffersByType(state.currentOffers, action.changeSortOptions),
       });
+
+    case ActionType.LOAD_FAVORITE_OFFERS:
+      return extend(state, {
+        favoriteOffers: action.payload
+      });
+
+    case ActionType.LOAD_NEAR_OFFERS:
+      return extend(state, {
+        nearOffers: action.payload,
+      });
+
   }
+
   return state;
 };
 

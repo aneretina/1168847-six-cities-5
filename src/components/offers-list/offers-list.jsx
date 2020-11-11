@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import OfferCard from '../offer-card/offer-card';
 
 const OffersList = (props)=> {
-  const {offers, className} = props;
+  const {offers, className, authorizationStatus, changeFavoriteStatusAction} = props;
 
   return (
     <div className={`places__list ${className}`}>
@@ -12,6 +12,8 @@ const OffersList = (props)=> {
           key={offer.id}
           offer={offer}
           id={offer.id}
+          authorizationStatus={authorizationStatus}
+          changeFavoriteStatusAction={changeFavoriteStatusAction}
         />))}
     </div>
   );
@@ -19,7 +21,9 @@ const OffersList = (props)=> {
 
 OffersList.propTypes = {
   offers: PropTypes.array.isRequired,
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  changeFavoriteStatusAction: PropTypes.func.isRequired,
 };
 
 export default OffersList;

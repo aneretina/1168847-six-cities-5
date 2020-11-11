@@ -5,7 +5,7 @@ import {AuthorizationStatus} from '../../const';
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NOT_AUTHORIZED,
-  userEmail: ``
+  email: ``
 };
 
 const user = (state = initialState, action) => {
@@ -17,8 +17,9 @@ const user = (state = initialState, action) => {
 
     case ActionType.LOAD_LOGGED_INFO:
       return extend(state, {
-        userEmail: action.payload.email,
+        email: action.payload,
       });
+
   }
   return state;
 };

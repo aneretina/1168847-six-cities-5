@@ -7,19 +7,20 @@ import OfferMap from "../offer-map/offer-map";
 import CitiesList from "../cities-list/cities-list";
 import Sorting from "../sorting/sorting";
 import MainEmpty from "../main-empty/main-empty";
-import {getCurrentCity, getCurrentCityOffers, getCurrentSort} from "../../store/selectors/selectors";
+import {getCurrentCity, getCurrentCityOffers, getCurrentSort, getAuthorizationStatus, getEmail} from "../../store/selectors/selectors";
 import {getSortedOffersByType} from "../../utils";
 import Header from "../ header/header";
+import {changeFavoriteStatus} from "../../store/api-actions";
 
 
 const MainPage = (props) => {
-  const {city, currentCityOffers, sort, onChangeSort} = props;
+  const {city, currentCityOffers, sort, onChangeSort, changeFavoriteStatusAction, authorizationStatus, email} = props;
 
   const sortedOffers = getSortedOffersByType(currentCityOffers, sort);
 
   return (
     <div className="page page--gray page--main">
-      <Header />
+      <Header email={email} />
       <main className={`page__main page__main--index${!currentCityOffers.length ? ` page__main--index-empty` : ``}`}>
         <CitiesList/>
         <div className="cities">
@@ -31,7 +32,11 @@ const MainPage = (props) => {
                 <Sorting
                   currentSort={sort}
                   onChangeSort={onChangeSort}/>
-                <OffersList offers={sortedOffers} className={`cities__places-list tabs__content`}/>
+                <OffersList
+                  offers={sortedOffers}
+                  className={`cities__places-list tabs__content`}authorizationStatus={authorizationStatus}
+                  changeFavoriteStatusAction={changeFavoriteStatusAction}
+                />
               </section>
               : <MainEmpty city={city} />
             }
@@ -53,18 +58,26 @@ MainPage.propTypes = {
   currentCityOffers: PropTypes.array.isRequired,
   sort: PropTypes.string.isRequired,
   onChangeSort: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  changeFavoriteStatusAction: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: getCurrentCity(state),
   currentCityOffers: getCurrentCityOffers(state),
   sort: getCurrentSort(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  email: getEmail(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeSort(currentSort) {
     dispatch(changeSortOptions(currentSort));
   },
+  changeFavoriteStatusAction(id, num) {
+    dispatch(changeFavoriteStatus(id, num));
+  }
 });
 
 export {MainPage};
