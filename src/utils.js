@@ -56,3 +56,16 @@ export const adaptOffer = (offer) => {
     offersNear: []
   };
 };
+
+export const adaptReview = (review) => {
+  return {
+    id: review[`id`],
+    date: new Date(review[`date`]),
+    text: review[`comment`],
+    rating: review[`rating`],
+    avatar: review[`user`][`avatar_url`],
+    userName: review[`user`][`name`],
+    userId: review[`user`][`id`],
+    userIsPro: review[`user`][`is_pro`],
+  };
+};

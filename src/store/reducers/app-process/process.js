@@ -11,7 +11,8 @@ const initialState = {
   currentSort: SortOptions.POPULAR,
   city: CITIES[0],
   nearOffers: [],
-  favoriteOffers: []
+  favoriteOffers: [],
+  reviews: [],
 };
 
 const processApp = (state = initialState, action) => {
@@ -58,6 +59,10 @@ const processApp = (state = initialState, action) => {
         nearOffers: action.payload,
       });
 
+    case ActionType.LOAD_REVIEWS:
+      return extend(state, {
+        reviews: action.payload,
+      });
   }
 
   return state;

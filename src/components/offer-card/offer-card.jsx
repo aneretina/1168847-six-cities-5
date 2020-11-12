@@ -19,7 +19,6 @@ const OfferCard = (props) => {
     changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
   };
 
-
   return (
     <article
       className="cities__place-card place-card"

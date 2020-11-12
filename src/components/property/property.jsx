@@ -8,7 +8,10 @@ import NewCommentForm from "../new-comment-form/new-comment-form";
 import {getCurrentCityOffers, getCurrentCity, getAuthorizationStatus, getNearOffers} from "../../store/selectors/selectors";
 import Header from "../ header/header";
 import {TO_PERCENT} from "../../const";
-import {changeFavoriteStatus, fetchNearOffersList} from "../../store/api-actions";
+import {changeFavoriteStatus, fetchNearOffersList, fetchReviewsList} from "../../store/api-actions";
+import offerProp from "../offer-card/offer.prop";
+import ReviewsList from "../reviews-list/reviews-list";
+import reviewProp from "../review/review.prop";
 
 
 class Property extends PureComponent {
@@ -18,14 +21,13 @@ class Property extends PureComponent {
 
   componenDidMount() {
     this.props.loadNearOffersAction(this.props.id);
+    this.props.loadReviewsAction(this.props.id);
   }
 
 
   render() {
     const {offers, reviews, id, activeCity, authorizationStatus, changeFavoriteStatusAction, nearOffers} = this.props;
-    console.log(id)
     const offer = offers.find((offerCurrent) => offerCurrent.id === +id);
-
 
     const picturesForShow = offer.pictures.slice(0, 6);
 
@@ -115,15 +117,16 @@ class Property extends PureComponent {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+
+
                   <NewCommentForm />
                 </section>
               </div>
             </div>
             <OfferMap offers={nearOffers}
               activeCity={activeCity}
-              //cityCoords={[nearOffers[0].city.location.latitude, nearOffers[0].city.location.longitude]}
-              //zoom={nearOffers[0].city.location.zoom}
+              // cityCoords={[nearOffers[0].city.location.latitude, nearOffers[0].city.location.longitude]}
+              // zoom={nearOffers[0].city.location.zoom}
               className={`property__map`} />
           </section>
           <div className="container">
@@ -150,19 +153,13 @@ class Property extends PureComponent {
 Property.propTypes = {
   nearOffers: PropTypes.array.isRequired,
   loadNearOffersAction: PropTypes.func.isRequired,
+  loadReviewsAction: PropTypes.func.isRequired,
   activeCity: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerProp),
   authorizationStatus: PropTypes.string.isRequired,
   changeFavoriteStatusAction: PropTypes.func.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    avatar: PropTypes.array.isRequired,
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  })).isRequired
+  reviews: PropTypes.arrayOf(reviewProp),
 };
 
 const mapStateToProps = (state) => ({
@@ -179,6 +176,10 @@ const mapDispatchToProps = ((dispatch) => ({
 
   loadNearOffersAction(id) {
     dispatch(fetchNearOffersList(id));
+  },
+
+  loadReviewsAction(id) {
+    dispatch(fetchReviewsList(id));
   },
 }));
 

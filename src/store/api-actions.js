@@ -1,5 +1,5 @@
-import {getOffersList, loadOffers, requireAuthorization, redirectToRoute, setLoggedUser, loadFavoriteOffers, loadNearOffers} from '../store/action';
-import {adaptOffer} from '../utils';
+import {getOffersList, loadOffers, requireAuthorization, redirectToRoute, setLoggedUser, loadFavoriteOffers, loadNearOffers, loadReviews} from '../store/action';
+import {adaptOffer, adaptReview} from '../utils';
 import {AuthorizationStatus} from '../const';
 
 
@@ -58,4 +58,11 @@ export const changeFavoriteStatus = (id, status) => (dispatch, _getState, api) =
     }));
 };
 
+export const fetchReviewsList = (offerId) => (dispatch, _getState, api) => (
+  api.get(`/comments/${offerId}`)
+  .then(({data}) => {
+    const modifiedReviews = data.map((review) => adaptReview(review));
+    dispatch(loadReviews(modifiedReviews));
+  })
+);
 

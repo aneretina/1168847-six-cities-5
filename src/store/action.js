@@ -12,6 +12,7 @@ export const ActionType = {
   LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
   CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
   LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
 };
 
 export const changeCity = (city) => ({
@@ -77,4 +78,9 @@ export const changeFavoriteStatus = (id, status) => ({
 export const loadNearOffers = (nearOffers) => ({
   type: ActionType.LOAD_NEAR_OFFERS,
   payload: nearOffers,
+});
+
+export const loadReviews = (reviews) => ({
+  type: ActionType.LOAD_REVIEWS,
+  payload: reviews,
 });

@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {TO_PERCENT} from '../../const';
+import reviewProp from './review.prop';
 
 
 const Review = (props) => {
@@ -18,7 +19,7 @@ const Review = (props) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `80%`}}></span>
+            <span style={{width: review.rating * TO_PERCENT + `%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -32,13 +33,7 @@ const Review = (props) => {
 };
 
 Review.propTypes = {
-  review: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    avatar: PropTypes.array.isRequired,
-    text: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  })
+  review: reviewProp,
 };
 
 export default Review;

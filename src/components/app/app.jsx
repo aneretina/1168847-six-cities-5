@@ -8,9 +8,7 @@ import Favorites from "../favorites/favorites";
 import Property from "../property/property";
 
 
-const App = (props) => {
-  const {reviews} = props;
-
+const App = () => {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
@@ -27,7 +25,6 @@ const App = (props) => {
           render={({match}) => (
             <Property
               id={match.params.id}
-              reviews={reviews}
             />
           )}
         />
@@ -40,17 +37,6 @@ const App = (props) => {
       </Switch>
     </BrowserRouter>
   );
-};
-
-App.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    avatar: PropTypes.array.isRequired,
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  })).isRequired
 };
 
 export default App;
