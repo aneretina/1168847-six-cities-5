@@ -1,7 +1,6 @@
 import React, {Fragment} from "react";
 import {Switch, Route, Router as BrowserRouter, Link} from "react-router-dom";
 import browserHistory from '../../browser-history';
-import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 import Login from "../login/login";
 import Favorites from "../favorites/favorites";

@@ -31,3 +31,14 @@ export const AuthorizationStatus = {
   NOT_AUTHORIZED: `NOT_AUTHORIZED`,
   AUTHORIZED: `AUTHORIZED`,
 };
+
+export const FavoriteBtnType = {
+  PROPERTY: `property`,
+  CARD: `place-card`
+};
+
+export const FavoriteBtnSize = {
+  [FavoriteBtnType.PROPERTY]: {width: 31, height: 33},
+  [FavoriteBtnType.CARD]: {width: 18, height: 19},
+};
+

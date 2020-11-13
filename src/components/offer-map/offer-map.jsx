@@ -67,7 +67,7 @@ class OfferMap extends PureComponent {
   }
 
   _addPins() {
-    const {offerId, offers} = this.props;
+    const {offerId, offers, mainOffer} = this.props;
 
     offers.forEach((offer) => {
       const pin = leaflet
@@ -76,6 +76,14 @@ class OfferMap extends PureComponent {
       this._pins.set(offer.id, pin);
     });
     this._activateMapPin(offerId);
+
+    if (mainOffer) {
+      leaflet
+        .marker([mainOffer.location.latitude, mainOffer.location.longitude], {icon: this.activeIcon})
+        .addTo(this._map);
+
+      return;
+    }
   }
 
   _activateMapPin(offerId) {
@@ -111,10 +119,11 @@ OfferMap.propTypes = {
   offerId: PropTypes.number.isRequired,
   cityCoords: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired,
+  mainOffer: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: getCurrentCityOffers(state),
+const mapStateToProps = (state, props) => ({
+  offers: props.offers || getCurrentCityOffers(state),
   offerId: getActiveOfferId(state),
   city: getCurrentCity(state)
 });

@@ -1,17 +1,17 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-// import Moment from 'react-moment';
 import OfferMap from "../offer-map/offer-map";
 import OffersList from "../offers-list/offers-list";
 import NewCommentForm from "../new-comment-form/new-comment-form";
-import {getCurrentCityOffers, getCurrentCity, getAuthorizationStatus, getNearOffers} from "../../store/selectors/selectors";
+import {getCurrentCityOffers, getCurrentCity, getAuthorizationStatus, getNearOffers, getReviews} from "../../store/selectors/selectors";
 import Header from "../ header/header";
-import {TO_PERCENT} from "../../const";
+import {TO_PERCENT, FavoriteBtnType} from "../../const";
 import {changeFavoriteStatus, fetchNearOffersList, fetchReviewsList} from "../../store/api-actions";
 import offerProp from "../offer-card/offer.prop";
 import ReviewsList from "../reviews-list/reviews-list";
 import reviewProp from "../review/review.prop";
+import FavoriteButton from "../favorite-button/favorite-button";
 
 
 class Property extends PureComponent {
@@ -19,7 +19,7 @@ class Property extends PureComponent {
     super(props);
   }
 
-  componenDidMount() {
+  componentDidMount() {
     this.props.loadNearOffersAction(this.props.id);
     this.props.loadReviewsAction(this.props.id);
   }
@@ -62,12 +62,11 @@ class Property extends PureComponent {
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <button onClick={onFavoriteButtonClick} className={`property__bookmark-button button ${offer.isFavorite ? `property__bookmark-button--active` : ``}`} type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <FavoriteButton
+                    type={FavoriteBtnType.PROPERTY}
+                    isFavorite={offer.isFavorite}
+                    onFavoriteButtonClick={onFavoriteButtonClick}
+                  />
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -117,17 +116,19 @@ class Property extends PureComponent {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-
-
+                  <ReviewsList reviews={reviews} />
                   <NewCommentForm />
                 </section>
               </div>
             </div>
+            {nearOffers.length > 0 &&
             <OfferMap offers={nearOffers}
               activeCity={activeCity}
-              // cityCoords={[nearOffers[0].city.location.latitude, nearOffers[0].city.location.longitude]}
-              // zoom={nearOffers[0].city.location.zoom}
+              cityCoords={[nearOffers[0].city.location.latitude, nearOffers[0].city.location.longitude]}
+              zoom={nearOffers[0].city.location.zoom}
+              mainOffer={offer}
               className={`property__map`} />
+            }
           </section>
           <div className="container">
             <section className="near-places places">
@@ -167,6 +168,7 @@ const mapStateToProps = (state) => ({
   activeCity: getCurrentCity(state),
   authorizationStatus: getAuthorizationStatus(state),
   nearOffers: getNearOffers(state),
+  reviews: getReviews(state),
 });
 
 const mapDispatchToProps = ((dispatch) => ({

@@ -11,7 +11,7 @@ export const getCurrentCity = (state) => state[NameSpace.PROCESS].city;
 export const getOffersFavorite = (state) => state[NameSpace.PROCESS].favoriteOffers;
 
 export const getNearOffers = (state) => state[NameSpace.PROCESS].nearOffers;
-
+export const getReviews = (state) => state[NameSpace.PROCESS].reviews;
 export const getEmail = (state) => state[NameSpace.USER].email;
 
 export const getAuthorizationStatus = (state) => state[NameSpace.USER].authorizationStatus;

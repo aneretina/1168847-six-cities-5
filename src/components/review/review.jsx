@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {TO_PERCENT} from '../../const';
 import reviewProp from './review.prop';
 
@@ -13,7 +14,7 @@ const Review = (props) => {
           <img className="reviews__avatar user__avatar" src={review.avatar} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
-          {review.name}
+          {review.userName}
         </span>
       </div>
       <div className="reviews__info">
@@ -26,7 +27,7 @@ const Review = (props) => {
         <p className="reviews__text">
           {review.text}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{review.date}</time>
+        <time className="reviews__time" dateTime={review.date}>{moment(review.date).format(`MMMM DD`)}</time>
       </div>
     </li>
   );

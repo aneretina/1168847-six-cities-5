@@ -24,9 +24,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
     dispatch(requireAuthorization(AuthorizationStatus.AUTHORIZED));
     dispatch(setLoggedUser(response.data.email));
   })
-      .catch((error) => {
-        throw error;
-      })
+  .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (

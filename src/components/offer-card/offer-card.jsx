@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {getActiveOfferId} from '../../store/selectors/selectors';
 import offerProp from './offer.prop';
-import {TO_PERCENT, AuthorizationStatus} from '../../const';
+import {TO_PERCENT, AuthorizationStatus, FavoriteBtnType} from '../../const';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 const OfferCard = (props) => {
   const {offer, id, setActiveOfferIdAction, resetActiveOfferIdAction, changeFavoriteStatusAction, authorizationStatus} = props;
@@ -15,7 +16,6 @@ const OfferCard = (props) => {
     if (authorizationStatus === AuthorizationStatus.NOT_AUTHORIZED) {
       history.push(`/login`);
     }
-
     changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
   };
 
@@ -44,12 +44,11 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button onClick={onFavoriteButtonClick} className={`place-card__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton
+            type={FavoriteBtnType.CARD}
+            isFavorite={offer.isFavorite}
+            onFavoriteButtonClick={onFavoriteButtonClick}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -5,7 +5,6 @@ import thunk from 'redux-thunk';
 import {createApi} from "./services/api";
 import {Provider} from 'react-redux';
 import App from "./components/app/app";
-import reviews from "./mocks/reviews";
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {fetchOffersList, checkAuth} from "./store/api-actions";
 import {requireAuthorization} from "./store/action";
@@ -30,7 +29,6 @@ Promise.all([
   ReactDOM.render(
       <Provider store={store}>
         <App
-          reviews={reviews}
         />
       </Provider>,
       document.querySelector(`#root`)
