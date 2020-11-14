@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {NameSpace} from '../reducers/root-reducer';
+import {NameSpace} from '../reducers/root/root-reducer';
 
 
 export const getOffers = (state) => state[NameSpace.DATA].offers;
@@ -13,7 +13,7 @@ export const getOffersFavorite = (state) => state[NameSpace.PROCESS].favoriteOff
 export const getNearOffers = (state) => state[NameSpace.PROCESS].nearOffers;
 export const getReviews = (state) => state[NameSpace.PROCESS].reviews;
 export const getEmail = (state) => state[NameSpace.USER].email;
-
+export const getError = (state) => state[NameSpace.USER].isErrorToSubmit;
 export const getAuthorizationStatus = (state) => state[NameSpace.USER].authorizationStatus;
 
 

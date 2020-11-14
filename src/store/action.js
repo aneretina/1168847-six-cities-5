@@ -13,6 +13,8 @@ export const ActionType = {
   CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
   LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
+  SEND_REVIEW: `SEND_REVIEW`,
+  UPDATE_ERROR_STATUS: `UPDATE_ERROR_STATUS`
 };
 
 export const changeCity = (city) => ({
@@ -84,3 +86,14 @@ export const loadReviews = (reviews) => ({
   type: ActionType.LOAD_REVIEWS,
   payload: reviews,
 });
+
+export const sendReview = (review, id) => ({
+  type: ActionType.SEND_REVIEW,
+  payload: review, id,
+});
+
+export const updateErrorStatus = (answer) => ({
+  type: ActionType.UPDATE_ERROR_STATUS,
+  payload: answer
+});
+

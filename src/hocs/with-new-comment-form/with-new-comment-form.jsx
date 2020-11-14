@@ -4,22 +4,38 @@ const withNewCommentForm = (Component) => {
   class WithNewCommentForm extends PureComponent {
     constructor(props) {
       super(props);
+
       this.state = {
         rating: ``,
         review: ``,
       };
 
-      this.handleFormSubmit = this.handleFormSubmit.bind(this);
-      this.handleFieldChange = this.handleFieldChange.bind(this);
+      this._handleRatingChange = this._handleRatingChange.bind(this);
+      this._handleTextFieldChange = this._handleTextFieldChange.bind(this);
+      this.resetState = this.resetState.bind(this);
     }
 
-    handleFormSubmit(evt) {
+    onFormSubmit(evt) {
       evt.preventDefault();
     }
 
-    handleFieldChange(evt) {
-      const {option, value} = evt.target;
-      this.setState({[option]: value});
+    _handleRatingChange(evt) {
+      this.setState({
+        rating: evt.target.value,
+      });
+    }
+
+    _handleTextFieldChange(evt) {
+      this.setState({
+        review: evt.target.value,
+      });
+    }
+
+    resetState() {
+      this.setState({
+        rating: ``,
+        review: ``
+      });
     }
 
     render() {
@@ -27,8 +43,9 @@ const withNewCommentForm = (Component) => {
         {...this.props}
         rating={this.state.rating}
         review={this.state.review}
-        onSubmit={this.handleFormSubmit}
-        onChange={this.handleFieldChange}
+        onRatingChange={this._handleRatingChange}
+        onTextFieldChange={this._handleTextFieldChange}
+        resetState={this.resetState}
       />;
     }
   }
