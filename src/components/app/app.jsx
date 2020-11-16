@@ -1,22 +1,22 @@
 import React, {Fragment} from "react";
-import {Switch, Route, BrowserRouter, Link} from "react-router-dom";
-import PropTypes from "prop-types";
+import {Switch, Route, Router as BrowserRouter, Link} from "react-router-dom";
+import browserHistory from '../../browser-history';
 import MainPage from "../main-page/main-page";
 import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import Property from "../property/property";
 
-const App = (props) => {
-  const {reviews} = props;
+
+const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/">
           <MainPage />
         </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
+        <Route exact path="/login"
+          render={() => <Login />}
+        />
         <Route exact path="/favorites">
           <Favorites />
         </Route>
@@ -24,7 +24,6 @@ const App = (props) => {
           render={({match}) => (
             <Property
               id={match.params.id}
-              reviews={reviews}
             />
           )}
         />
@@ -37,17 +36,6 @@ const App = (props) => {
       </Switch>
     </BrowserRouter>
   );
-};
-
-App.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    avatar: PropTypes.array.isRequired,
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  })).isRequired
 };
 
 export default App;

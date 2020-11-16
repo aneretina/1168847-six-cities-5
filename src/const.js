@@ -1,13 +1,6 @@
 export const ZOOM = 12;
 
-export const CitiesCoordinates = {
-  AMSTERDAM: [52.38333, 4.9],
-  PARIS: [48.864716, 2.349014],
-  COLOGNE: [50.935173, 6.953101],
-  HAMBURG: [53.551086, 9.993682],
-  DUSSELDORF: [51.233334, 6.783333],
-  BRUSSELS: [50.8505, 4.3488]
-};
+export const TO_PERCENT = 20;
 
 export const CITIES = [
   `Amsterdam`,
@@ -34,16 +27,18 @@ export const SortOptions = {
   TOP_RATED_FIRST: `Top rated first`
 };
 
-export const getSortedOffersByType = (offers, sortType) => {
-  switch (sortType) {
-    case SortOptions.POPULAR:
-      return offers;
-    case SortOptions.PRICE_LOW_TO_HIGH:
-      return offers.sort((a, b) => a.price - b.price);
-    case SortOptions.PRICE_HIGH_TO_LOW:
-      return offers.sort((a, b) => b.price - a.price);
-    case SortOptions.TOP_RATED_FIRST:
-      return offers.sort((a, b) => b.rating - a.rating);
-  }
-  return offers;
+export const AuthorizationStatus = {
+  NOT_AUTHORIZED: `NOT_AUTHORIZED`,
+  AUTHORIZED: `AUTHORIZED`,
 };
+
+export const FavoriteBtnType = {
+  PROPERTY: `property`,
+  CARD: `place-card`
+};
+
+export const FavoriteBtnSize = {
+  [FavoriteBtnType.PROPERTY]: {width: 31, height: 33},
+  [FavoriteBtnType.CARD]: {width: 18, height: 19},
+};
+

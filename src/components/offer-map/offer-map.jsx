@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {ZOOM, Icon, ID_MAP_CONTAINER, CitiesCoordinates} from "../../const.js";
+import {Icon, ID_MAP_CONTAINER} from "../../const.js";
+import {getCurrentCityOffers, getActiveOfferId, getCurrentCity} from '../../store/selectors/selectors.js';
 
 class OfferMap extends PureComponent {
   constructor(props) {
@@ -24,11 +25,11 @@ class OfferMap extends PureComponent {
   }
 
   componentDidMount() {
-    const {offers, city} = this.props;
+    const {offers, cityCoords, zoom} = this.props;
 
     this._map = leaflet.map(ID_MAP_CONTAINER, {
-      center: CitiesCoordinates[city.toUpperCase()],
-      zoom: ZOOM,
+      center: cityCoords,
+      zoom,
       zoomControl: false,
       marker: true
     });
@@ -66,14 +67,23 @@ class OfferMap extends PureComponent {
   }
 
   _addPins() {
-    const {offerId, offers} = this.props;
+    const {offerId, offers, mainOffer} = this.props;
+
     offers.forEach((offer) => {
       const pin = leaflet
-    .marker(offer.location, {icon: this.defaultIcon})
+    .marker([offer.location.latitude, offer.location.longitude], {icon: this.defaultIcon})
     .addTo(this._map);
       this._pins.set(offer.id, pin);
     });
     this._activateMapPin(offerId);
+
+    if (mainOffer) {
+      leaflet
+        .marker([mainOffer.location.latitude, mainOffer.location.longitude], {icon: this.activeIcon})
+        .addTo(this._map);
+
+      return;
+    }
   }
 
   _activateMapPin(offerId) {
@@ -91,7 +101,7 @@ class OfferMap extends PureComponent {
   }
 
   _setView() {
-    this._map.setView(CitiesCoordinates[this.props.city.toUpperCase()], ZOOM);
+    this._map.setView(this.props.cityCoords, this.props.zoom);
   }
 
   _removePins() {
@@ -106,13 +116,16 @@ OfferMap.propTypes = {
   offers: PropTypes.array.isRequired,
   className: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
-  offerId: PropTypes.number.isRequired
+  offerId: PropTypes.number.isRequired,
+  cityCoords: PropTypes.arrayOf(PropTypes.number).isRequired,
+  zoom: PropTypes.number.isRequired,
+  mainOffer: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.currentCityOffers,
-  offerId: state.activeOfferId,
-  city: state.city
+const mapStateToProps = (state, props) => ({
+  offers: props.offers || getCurrentCityOffers(state),
+  offerId: getActiveOfferId(state),
+  city: getCurrentCity(state)
 });
 
 export {OfferMap};

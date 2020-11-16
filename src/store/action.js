@@ -5,32 +5,82 @@ export const ActionType = {
   RESET_ACTIVE_OFFER_ID: `SET_ACTIVE_OFFER_ID`,
   CHANGE_SORT_OPTIONS: `CHANGE_SORT_OPTIONS`,
   CHANGE_OFFERS_BY_SORT: `CHANGE_OFFERS_BY_SORT`,
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  LOAD_LOGGED_INFO: `LOAD_LOGGED_INFO`,
+  LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
+  CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
+  LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
 };
 
+export const changeCity = (city) => ({
+  type: ActionType.CHANGE_CITY,
+  payload: city,
+});
 
-export const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: city,
-  }),
-  getOffersList: () => ({
-    type: ActionType.GET_OFFERS_LIST,
-  }),
-  setActiveOfferId: (id) => ({
-    type: ActionType.SET_ACTIVE_OFFER_ID,
-    payload: id,
-  }),
-  resetActiveOfferId: () => ({
-    type: ActionType.SET_ACTIVE_OFFER_ID,
-    payload: -1,
-  }),
-  changeSortOptions: (sortType) => ({
-    type: ActionType.CHANGE_SORT_OPTIONS,
-    payload: sortType,
-  }),
-  changeOffersBySort: (sortType) => ({
-    type: ActionType.CHANGE_OFFERS_BY_SORT,
-    payload: sortType,
-  }),
+export const getOffersList = () => ({
+  type: ActionType.GET_OFFERS_LIST,
+});
 
-};
+export const setActiveOfferId = (id) => ({
+  type: ActionType.SET_ACTIVE_OFFER_ID,
+  payload: id,
+});
+
+export const resetActiveOfferId = () => ({
+  type: ActionType.SET_ACTIVE_OFFER_ID,
+  payload: -1,
+});
+
+export const changeSortOptions = (sortType) => ({
+  type: ActionType.CHANGE_SORT_OPTIONS,
+  payload: sortType,
+});
+
+export const changeOffersBySort = (sortType) => ({
+  type: ActionType.CHANGE_OFFERS_BY_SORT,
+  payload: sortType,
+});
+
+export const loadOffers = (offers) => ({
+  type: ActionType.LOAD_OFFERS,
+  payload: offers,
+});
+
+export const requireAuthorization = (status) => ({
+  type: ActionType.REQUIRED_AUTHORIZATION,
+  payload: status
+});
+
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
+
+export const setLoggedUser = (email) => ({
+  type: ActionType.LOAD_LOGGED_INFO,
+  payload: email,
+});
+
+export const loadFavoriteOffers = (favoriteOffers) => ({
+  type: ActionType.LOAD_FAVORITE_OFFERS,
+  payload: favoriteOffers
+});
+
+
+export const changeFavoriteStatus = (id, status) => ({
+  type: ActionType.CHANGE_FAVORITE_STATUS,
+  payload: id, status,
+});
+
+export const loadNearOffers = (nearOffers) => ({
+  type: ActionType.LOAD_NEAR_OFFERS,
+  payload: nearOffers,
+});
+
+export const loadReviews = (reviews) => ({
+  type: ActionType.LOAD_REVIEWS,
+  payload: reviews,
+});

@@ -1,20 +1,22 @@
-import {extend} from "../utils";
-import {ActionType} from "./action";
-import {CITIES, SortOptions, getSortedOffersByType} from "../const";
-import offers from "../mocks/offers";
+
+import {CITIES, SortOptions} from "../../../const";
+import {extend, getSortedOffersByType} from "../../../utils";
+import {ActionType} from "../../action";
 
 
 const initialState = {
-  city: CITIES[0],
-  currentCityOffers: offers.filter((offer) => offer.city === CITIES[0]),
+  currentCityOffers: [].filter((offer) => offer.city === CITIES[0]),
   cities: CITIES,
   activeOfferId: -1,
   currentSort: SortOptions.POPULAR,
+  city: CITIES[0],
+  nearOffers: [],
+  favoriteOffers: [],
+  reviews: [],
 };
 
-
-const reducer = (state = initialState, action) => {
-  const offersFilteredByCity = offers.filter((offer) => offer.city === state.city);
+const processApp = (state = initialState, action) => {
+  const offersFilteredByCity = [].filter((offer) => offer.city === state.city);
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
@@ -46,8 +48,24 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentOffers: getSortedOffersByType(state.currentOffers, action.changeSortOptions),
       });
+
+    case ActionType.LOAD_FAVORITE_OFFERS:
+      return extend(state, {
+        favoriteOffers: action.payload
+      });
+
+    case ActionType.LOAD_NEAR_OFFERS:
+      return extend(state, {
+        nearOffers: action.payload,
+      });
+
+    case ActionType.LOAD_REVIEWS:
+      return extend(state, {
+        reviews: action.payload,
+      });
   }
+
   return state;
 };
 
-export {reducer};
+export {processApp};
