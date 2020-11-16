@@ -14,7 +14,6 @@ export const ActionType = {
   LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   SEND_REVIEW: `SEND_REVIEW`,
-  UPDATE_ERROR_STATUS: `UPDATE_ERROR_STATUS`
 };
 
 export const changeCity = (city) => ({
@@ -92,8 +91,4 @@ export const sendReview = (review, id) => ({
   payload: review, id,
 });
 
-export const updateErrorStatus = (answer) => ({
-  type: ActionType.UPDATE_ERROR_STATUS,
-  payload: answer
-});
 

@@ -3,15 +3,16 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import OfferMap from "../offer-map/offer-map";
 import OffersList from "../offers-list/offers-list";
-import NewCommentForm from "../new-comment-form/new-comment-form";
+import ReviewForm from "../review-form/review-form";
 import {getCurrentCityOffers, getCurrentCity, getAuthorizationStatus, getNearOffers, getReviews} from "../../store/selectors/selectors";
 import Header from "../ header/header";
-import {TO_PERCENT, FavoriteBtnType} from "../../const";
+import {TO_PERCENT, FavoriteBtnType, AuthorizationStatus} from "../../const";
 import {changeFavoriteStatus, fetchNearOffersList, fetchReviewsList} from "../../store/api-actions";
 import offerProp from "../offer-card/offer.prop";
 import ReviewsList from "../reviews-list/reviews-list";
 import reviewProp from "../review/review.prop";
 import FavoriteButton from "../favorite-button/favorite-button";
+import browserHistory from "../../browser-history";
 
 
 class Property extends PureComponent {
@@ -27,6 +28,10 @@ class Property extends PureComponent {
     const picturesForShow = offer.pictures.slice(0, 6);
 
     const onFavoriteButtonClick = () => {
+      if (this.props.authorizationStatus === AuthorizationStatus.NOT_AUTHORIZED) {
+        browserHistory.push(`/login`);
+      }
+
       changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
     };
 
@@ -112,7 +117,9 @@ class Property extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={reviews} />
-                  <NewCommentForm id={id} />
+                  {authorizationStatus === AuthorizationStatus.AUTHORIZED &&
+                  <ReviewForm id={id} />
+                  }
                 </section>
               </div>
             </div>

@@ -6,7 +6,6 @@ import {AuthorizationStatus} from '../../../const';
 const initialState = {
   authorizationStatus: AuthorizationStatus.NOT_AUTHORIZED,
   email: ``,
-  isErrorToSubmit: false
 };
 
 const user = (state = initialState, action) => {
@@ -19,11 +18,6 @@ const user = (state = initialState, action) => {
     case ActionType.LOAD_LOGGED_INFO:
       return extend(state, {
         email: action.payload,
-      });
-
-    case ActionType.UPDATE_ERROR_STATUS:
-      return Object.assign({}, state, {
-        isErrorToSubmit: action.payload,
       });
   }
   return state;

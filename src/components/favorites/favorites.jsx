@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {getOffersFavorite} from "../../store/selectors/selectors";
 import Header from "../ header/header";
 import {getFavoriteOffers, changeFavoriteStatus} from "../../store/api-actions";
-import {CITIES, TO_PERCENT} from "../../const";
+import {CITIES} from "../../const";
 import Footer from "../footer/footer";
 import FavoriteCard from "../favorite-card/favorite-card";
 

@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 
-const withNewCommentForm = (Component) => {
+const withReviewForm = (Component) => {
   class WithNewCommentForm extends PureComponent {
     constructor(props) {
       super(props);
@@ -8,24 +8,30 @@ const withNewCommentForm = (Component) => {
       this.state = {
         rating: ``,
         review: ``,
+        isDisabled: false,
       };
 
-      this._handleRatingChange = this._handleRatingChange.bind(this);
-      this._handleTextFieldChange = this._handleTextFieldChange.bind(this);
+      this._onRatingChange = this._onRatingChange.bind(this);
+      this._onTextChange = this._onTextChange.bind(this);
       this.resetState = this.resetState.bind(this);
+      this._updateDisableFormStatus = this._updateDisableFormStatus.bind(this);
     }
 
     onFormSubmit(evt) {
       evt.preventDefault();
     }
 
-    _handleRatingChange(evt) {
+    _onRatingChange(evt) {
       this.setState({
         rating: evt.target.value,
       });
     }
 
-    _handleTextFieldChange(evt) {
+    _updateDisableFormStatus(status) {
+      this.setState({isDisabled: status});
+    }
+
+    _onTextChange(evt) {
       this.setState({
         review: evt.target.value,
       });
@@ -36,6 +42,7 @@ const withNewCommentForm = (Component) => {
         rating: ``,
         review: ``
       });
+
     }
 
     render() {
@@ -43,9 +50,11 @@ const withNewCommentForm = (Component) => {
         {...this.props}
         rating={this.state.rating}
         review={this.state.review}
-        onRatingChange={this._handleRatingChange}
-        onTextFieldChange={this._handleTextFieldChange}
+        onRatingChange={this._onRatingChange}
+        onTextChange={this._onTextChange}
         resetState={this.resetState}
+        isDisabled={this.state.isDisabled}
+        updateDisableFormStatus={this._updateDisableFormStatus}
       />;
     }
   }
@@ -53,4 +62,4 @@ const withNewCommentForm = (Component) => {
   return WithNewCommentForm;
 };
 
-export default withNewCommentForm;
+export default withReviewForm;

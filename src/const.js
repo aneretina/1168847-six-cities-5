@@ -2,6 +2,16 @@ export const ZOOM = 12;
 
 export const TO_PERCENT = 20;
 
+export const ratings = [`5`, `4`, `3`, `2`, `1`];
+
+export const ratingTitle = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
+
+export const ERROR_TEXT = `failed to send your comment, review it and try again`;
+
+export const REVIEWS_COUNT = 10;
+
+export const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 export const CITIES = [
   `Amsterdam`,
   `Paris`,
@@ -11,6 +21,16 @@ export const CITIES = [
   `Brussels`
 ];
 
+
+export const DisableStatus = {
+  DISABLED: true,
+  NOT_DISABLED: false
+};
+
+export const TextLimits = {
+  MIN: 50,
+  MAX: 299,
+};
 
 export const Icon = {
   URL: `/img/pin.svg`,
