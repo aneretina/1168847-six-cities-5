@@ -15,19 +15,14 @@ import FavoriteButton from "../favorite-button/favorite-button";
 
 
 class Property extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.loadNearOffersAction(this.props.id);
     this.props.loadReviewsAction(this.props.id);
   }
 
-
   render() {
     const {offers, reviews, id, activeCity, authorizationStatus, changeFavoriteStatusAction, nearOffers} = this.props;
-    const offer = offers.find((offerCurrent) => offerCurrent.id === +id);
+    const offer = offers.find((offerCurrent) => offerCurrent.id === Number(id));
 
     const picturesForShow = offer.pictures.slice(0, 6);
 
@@ -117,7 +112,7 @@ class Property extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={reviews} />
-                  <NewCommentForm />
+                  <NewCommentForm id={id} />
                 </section>
               </div>
             </div>

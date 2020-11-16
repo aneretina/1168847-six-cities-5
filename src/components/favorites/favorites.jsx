@@ -5,11 +5,14 @@ import {getOffersFavorite} from "../../store/selectors/selectors";
 import Header from "../ header/header";
 import {getFavoriteOffers, changeFavoriteStatus} from "../../store/api-actions";
 import {CITIES, TO_PERCENT} from "../../const";
+import Footer from "../footer/footer";
+import FavoriteCard from "../favorite-card/favorite-card";
 
 
 class Favorites extends PureComponent {
   constructor(props) {
     super(props);
+    this.onFavoriteButtonClick = this.onFavoriteButtonClick.bind(this);
   }
 
 
@@ -19,16 +22,18 @@ class Favorites extends PureComponent {
     loadFavoriteOffersAction();
   }
 
-  render() {
-    const {favoriteOffers, changeFavoriteStatusAction} = this.props;
-    const onFavoriteButtonClick = (evt) => {
-      const offer = evt.target.closest(`.place-card`);
-      if (!offer) {
-        return;
-      }
+  onFavoriteButtonClick(evt) {
+    const offer = evt.target.closest(`.place-card`);
+    if (!offer) {
+      return;
+    }
 
-      changeFavoriteStatusAction(offer.id, 0);
-    };
+    this.props.changeFavoriteStatus(offer.id, 0);
+  }
+
+  render() {
+    const {favoriteOffers} = this.props;
+
 
     const isEmpty = !favoriteOffers.length;
 
@@ -64,37 +69,10 @@ class Favorites extends PureComponent {
                             </div>
                             <div className="favorites__places">
                               {filteredOffers.map((offer) => (
-                                <article key={`${offer.type}-${offer.id}`} className="favorites__card place-card" id={offer.id}>
-                                  <div className="favorites__image-wrapper place-card__image-wrapper">
-                                    <a href="#">
-                                      <img className="place-card__image" src={offer.previewImage} width="150" height="110" alt="Place image"/>
-                                    </a>
-                                  </div>
-                                  <div className="favorites__card-info place-card__info">
-                                    <div className="place-card__price-wrapper">
-                                      <div className="place-card__price">
-                                        <b className="place-card__price-value">&euro; {offer.price}</b>
-                                        <span className="place-card__price-text">&#47;&nbsp;night</span>
-                                      </div>
-                                      <button onClick={onFavoriteButtonClick} className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-                                        <svg className="place-card__bookmark-icon" width="18" height="19">
-                                          <use xlinkHref="#icon-bookmark"></use>
-                                        </svg>
-                                        <span className="visually-hidden">In bookmarks</span>
-                                      </button>
-                                    </div>
-                                    <div className="place-card__rating rating">
-                                      <div className="place-card__stars rating__stars">
-                                        <span style={{width: offer.rating * TO_PERCENT + `%`}}></span>
-                                        <span className="visually-hidden">Rating</span>
-                                      </div>
-                                    </div>
-                                    <h2 className="place-card__name">
-                                      <a href="#">{offer.title}</a>
-                                    </h2>
-                                    <p className="place-card__type">{offer.type}</p>
-                                  </div>
-                                </article>
+                                <FavoriteCard
+                                  key={offer.id}
+                                  offer={offer}
+                                  onFavoriteButtonClick={this.onFavoriteButtonClick} />
                               ))}
                               <p></p>
                             </div>
@@ -110,11 +88,7 @@ class Favorites extends PureComponent {
             </section>
           </div>
         </main>
-        <footer className="footer container">
-          <a className="footer__logo-link" href="main.html">
-            <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-          </a>
-        </footer>
+        <Footer />
       </div>
     );
   }
@@ -123,7 +97,7 @@ class Favorites extends PureComponent {
 
 Favorites.propTypes = {
   favoriteOffers: PropTypes.array.isRequired,
-  changeFavoriteStatusAction: PropTypes.func.isRequired,
+  changeFavoriteStatus: PropTypes.func.isRequired,
   loadFavoriteOffersAction: PropTypes.func.isRequired,
 };
 
@@ -135,7 +109,7 @@ const mapDispatchToProps = ((dispatch) => ({
   loadFavoriteOffersAction() {
     dispatch(getFavoriteOffers());
   },
-  changeFavoriteStatusAction(id, num) {
+  changeFavoriteStatus(id, num) {
     dispatch(changeFavoriteStatus(id, num));
   }
 }));

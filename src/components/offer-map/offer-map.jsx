@@ -53,6 +53,7 @@ class OfferMap extends PureComponent {
 
     this._addPins(offers);
 
+
     if (offerId !== prevProps.offerId) {
       this._deactivateMapPin(prevProps.offerId);
       this._activateMapPin(offerId);
@@ -81,8 +82,6 @@ class OfferMap extends PureComponent {
       leaflet
         .marker([mainOffer.location.latitude, mainOffer.location.longitude], {icon: this.activeIcon})
         .addTo(this._map);
-
-      return;
     }
   }
 
