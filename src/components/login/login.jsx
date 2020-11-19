@@ -2,8 +2,8 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
-import Header from "../ header/header";
-import { EMAIL_REGEX } from "../../const";
+import Header from "../header/header";
+import {EMAIL_REGEX} from "../../const";
 
 class Login extends PureComponent {
   constructor(props) {

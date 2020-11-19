@@ -5,7 +5,7 @@ import {ActionType} from "../../action";
 
 
 const initialState = {
-  currentCityOffers: [].filter((offer) => offer.city === CITIES[0]),
+  currentCityOffers: [],
   cities: CITIES,
   activeOfferId: -1,
   currentSort: SortOptions.POPULAR,
@@ -16,7 +16,6 @@ const initialState = {
 };
 
 const processApp = (state = initialState, action) => {
-  const offersFilteredByCity = [].filter((offer) => offer.city === state.city);
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
@@ -30,10 +29,6 @@ const processApp = (state = initialState, action) => {
       return extend(state, {
         activeOfferId: action.payload,
       });
-    case ActionType.GET_OFFERS_LIST:
-      return extend(state, {
-        currentCityOffers: offersFilteredByCity,
-      });
     case ActionType.CHANGE_SORT_OPTIONS:
       return extend(state, {
         currentSort: action.payload,
@@ -42,7 +37,7 @@ const processApp = (state = initialState, action) => {
     case ActionType.CHANGE_OFFERS_BY_SORT:
       if (action.changeSortOptions === initialState.currentSort) {
         return extend(state, {
-          currentCityOffers: offersFilteredByCity,
+          offers: action.payload,
         });
       }
       return extend(state, {

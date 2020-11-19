@@ -9,8 +9,9 @@ import Sorting from "../sorting/sorting";
 import MainEmpty from "../main-empty/main-empty";
 import {getCurrentCity, getCurrentCityOffers, getCurrentSort, getAuthorizationStatus, getEmail} from "../../store/selectors/selectors";
 import {getSortedOffersByType} from "../../utils";
-import Header from "../ header/header";
+import Header from "../header/header";
 import {changeFavoriteStatus} from "../../store/api-actions";
+import offerProp from "../offer-card/offer.prop";
 
 
 const MainPage = (props) => {
@@ -55,7 +56,7 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   city: PropTypes.string.isRequired,
-  currentCityOffers: PropTypes.array.isRequired,
+  currentCityOffers: PropTypes.arrayOf(offerProp),
   sort: PropTypes.string.isRequired,
   onChangeSort: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,

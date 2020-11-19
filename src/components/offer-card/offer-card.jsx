@@ -24,7 +24,7 @@ class OfferCard extends PureComponent {
 
   render() {
     const {offer, id, setActiveOfferIdAction, resetActiveOfferIdAction} = this.props;
-    const offerLink = `offer/` + id;
+    const offerLink = `/offer/` + id;
 
 
     return (
@@ -55,7 +55,7 @@ class OfferCard extends PureComponent {
             <FavoriteButton
               type={FavoriteBtnType.CARD}
               isFavorite={offer.isFavorite}
-              onFavoriteButtonClick={this.onFavoriteButtonClick}
+              onClick={this.onFavoriteButtonClick}
             />
           </div>
           <div className="place-card__rating rating">

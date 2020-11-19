@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
 import {getOffersFavorite} from "../../store/selectors/selectors";
-import Header from "../ header/header";
+import Header from "../header/header";
 import {getFavoriteOffers, changeFavoriteStatus} from "../../store/api-actions";
 import {CITIES} from "../../const";
 import Footer from "../footer/footer";

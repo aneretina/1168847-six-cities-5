@@ -4,14 +4,14 @@ import {FavoriteBtnSize, FavoriteBtnType} from '../../const';
 
 
 const FavoriteButton = (props) => {
-  const {type, isFavorite, onFavoriteButtonClick} = props;
+  const {type, isFavorite, onClick} = props;
 
-  const bookmarkBtnClassname = isFavorite ? `${type}__bookmark-button ${type}__bookmark-button--active button` : `${type}__bookmark-button button`;
+  const favoriteBtnClassname = isFavorite ? `${type}__bookmark-button ${type}__bookmark-button--active button` : `${type}__bookmark-button button`;
 
   const {width, height} = FavoriteBtnSize[type];
 
   return (
-    <button className={bookmarkBtnClassname} type="button" onClick={onFavoriteButtonClick}>
+    <button className={favoriteBtnClassname} type="button" onClick={onClick}>
       <svg className={`${type}__bookmark-icon`} width={width} height={height}>
         <use xlinkHref="#icon-bookmark" />
       </svg>
@@ -29,7 +29,7 @@ FavoriteButton.propTypes = {
     FavoriteBtnType.PROPERTY,
     FavoriteBtnType.CARD
   ]).isRequired,
-  onFavoriteButtonClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export default FavoriteButton;

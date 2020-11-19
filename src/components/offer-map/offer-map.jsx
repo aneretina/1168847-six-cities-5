@@ -44,13 +44,11 @@ class OfferMap extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {offers, city, offerId} = this.props;
+    const {offers, offerId} = this.props;
 
-    if (city !== prevProps.city) {
-      this._removePins();
-      this._setView();
-    }
 
+    this._removePins();
+    this._setView();
     this._addPins(offers);
 
 
@@ -114,11 +112,10 @@ class OfferMap extends PureComponent {
 OfferMap.propTypes = {
   offers: PropTypes.array.isRequired,
   className: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
   offerId: PropTypes.number.isRequired,
   cityCoords: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired,
-  mainOffer: PropTypes.object.isRequired,
+  mainOffer: PropTypes.object,
 };
 
 const mapStateToProps = (state, props) => ({
