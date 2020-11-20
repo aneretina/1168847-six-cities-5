@@ -11,6 +11,7 @@ import {requireAuthorization} from "./store/action";
 import {AuthorizationStatus} from "./const";
 import {redirect} from './store/middlewares/redirect';
 import rootReducer from "./store/reducers/root/root-reducer";
+import "leaflet/dist/leaflet.css";
 
 const api = createApi(() => store.dispatch(requireAuthorization(AuthorizationStatus.NOT_AUTHORIZED)));
 

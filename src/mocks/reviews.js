@@ -1,42 +1,33 @@
-export default [
+export const reviews = [
+  {
+    id: 64,
+    date: new Date(`Tue Oct 27 2020 12:29:21 GMT+0300`),
+    text: `We would like to thank all the staff, who were very friendly during our stay.`,
+    rating: 4,
+    avatar: `img/avatar-max.jpg`,
+    userName: `Tom`,
+    userId: 4,
+    userIsPro: true
+  },
   {
     id: 1,
-    name: `Jake`,
-    avatar: [`https://placeimg.com/640/480/people/101`,
-      `https://placeimg.com/640/480/people/102`,
-      `https://placeimg.com/640/480/people/103`,
-      `https://placeimg.com/640/480/people/104`,
-    ],
-    rating: 3,
-    text: `We would like to thank all the staff, who were very friendly during our stay.`,
-    date: `10.10.2019`,
-  },
-
-  {
-    id: 2,
-    name: `Mary`,
-    avatar: [`https://placeimg.com/640/480/people/101`,
-      `https://placeimg.com/640/480/people/102`,
-      `https://placeimg.com/640/480/people/103`,
-      `https://placeimg.com/640/480/people/104`,
-    ],
-    rating: 2,
+    date: new Date(`Tue Oct 27 2020 12:29:21 GMT+0300`),
     text: `The hotel had everything we needed and it was in an excellent location, being in a lovely area with lots of places to enjoy ourselves.`,
-    date: `10.09.2019`,
-  },
-
-  {
-    id: 3,
-    name: `Oliver`,
-    avatar: [`https://placeimg.com/640/480/people/101`,
-      `https://placeimg.com/640/480/people/102`,
-      `https://placeimg.com/640/480/people/103`,
-      `https://placeimg.com/640/480/people/104`,
-    ],
     rating: 5,
-    text: `I’ve been many times and I will come again and again.`,
-    date: `10.09.2020`,
+    avatar: `img/avatar-max.jpg`,
+    userName: `Peter`,
+    userId: 1,
+    userIsPro: true
   },
-
-
+  {
+    id: 18,
+    date: new Date(`Tue Oct 27 2020 12:29:21 GMT+0300`),
+    text: `I’ve been many times and I will come again and again.`,
+    rating: 5,
+    avatar: `img/avatar-max.jpg`,
+    userName: `Michael`,
+    userId: 1,
+    userIsPro: true
+  },
 ];
+

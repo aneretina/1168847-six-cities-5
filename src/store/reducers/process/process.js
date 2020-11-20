@@ -5,7 +5,6 @@ import {ActionType} from "../../action";
 
 
 const initialState = {
-  currentCityOffers: [],
   cities: CITIES,
   activeOfferId: -1,
   currentSort: SortOptions.POPULAR,

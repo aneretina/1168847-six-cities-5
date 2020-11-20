@@ -20,6 +20,7 @@ class Property extends PureComponent {
     super(props);
     this.onFavoriteButtonClick = this.onFavoriteButtonClick.bind(this);
   }
+
   componentDidMount() {
     this.props.loadNearOffersAction(this.props.id);
     this.props.loadReviewsAction(this.props.id);

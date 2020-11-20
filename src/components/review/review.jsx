@@ -1,11 +1,13 @@
 import React from 'react';
-import moment from 'moment';
 import {TO_PERCENT} from '../../const';
 import reviewProp from './review.prop';
 
 
 const Review = (props) => {
   const {review} = props;
+
+  const editingDate = review.date.toLocaleString(`en-US`, {year: `numeric`, month: `long`});
+  const dateTime = review.date.toISOString().substring(0, 10);
 
   return (
     <li className="reviews__item">
@@ -27,7 +29,7 @@ const Review = (props) => {
         <p className="reviews__text">
           {review.text}
         </p>
-        <time className="reviews__time" dateTime={review.date}>{moment(review.date).format(`MMMM DD`)}</time>
+        <time className="reviews__time" dateTime={dateTime}>{editingDate}</time>
       </div>
     </li>
   );

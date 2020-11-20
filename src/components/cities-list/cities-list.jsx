@@ -1,11 +1,12 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {changeCity, getOffersList} from "../../store/action";
+import {changeCity} from "../../store/action";
 import {getCitiesList, getCurrentCity} from "../../store/selectors/selectors";
 
 const CitiesList = (props) => {
-  const {cities, onCityClick, currentCity, getOffersListAction} = props;
+  const {cities, onCityClick, currentCity} = props;
+
   return (
     <Fragment>
       <h1 className="visually-hidden">Cities</h1>
@@ -18,7 +19,6 @@ const CitiesList = (props) => {
                 onClick={(evt) => {
                   evt.preventDefault();
                   onCityClick(item);
-                  getOffersListAction();
                 }}>
                 <a
                   className={`locations__item-link tabs__item 
@@ -40,7 +40,6 @@ CitiesList.propTypes = {
   cities: PropTypes.array.isRequired,
   onCityClick: PropTypes.func.isRequired,
   currentCity: PropTypes.string.isRequired,
-  getOffersListAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -50,9 +49,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (city) => dispatch(changeCity(city)),
-  getOffersListAction() {
-    dispatch(getOffersList());
-  }
 });
 
 export {CitiesList};

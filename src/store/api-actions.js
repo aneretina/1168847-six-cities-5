@@ -69,9 +69,6 @@ export const sendReview = ({review: comment, rating}, offerId) => (dispatch, _ge
   .then(({data}) => {
     const modifiedNewReviews = data.map((newReview) => adaptReview(newReview));
     dispatch(loadReviews(modifiedNewReviews));
-  })
-  .catch((err) => {
-    throw err;
-  });
+  }).catch(() => {});
 };
 
