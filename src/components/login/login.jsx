@@ -2,7 +2,8 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
-import Header from "../ header/header";
+import Header from "../header/header";
+import {EMAIL_REGEX} from "../../const";
 
 class Login extends PureComponent {
   constructor(props) {
@@ -15,10 +16,12 @@ class Login extends PureComponent {
   handleSubmit(evt) {
     evt.preventDefault();
 
-    this.props.onSubmit({
-      login: this.loginRef.current.value,
-      password: this.passwordRef.current.value,
-    });
+    if (EMAIL_REGEX.test(this.loginRef.current.value) && this.passwordRef.current.value) {
+      this.props.onSubmit({
+        login: this.loginRef.current.value,
+        password: this.passwordRef.current.value,
+      });
+    }
   }
 
   render() {

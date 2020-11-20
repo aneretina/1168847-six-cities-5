@@ -23,7 +23,8 @@ const App = () => {
         <Route exact path='/offer/:id'
           render={({match}) => (
             <Property
-              id={match.params.id}
+              key={Number(match.params.id)}
+              id={Number(match.params.id)}
             />
           )}
         />

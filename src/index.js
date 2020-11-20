@@ -9,8 +9,8 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {fetchOffersList, checkAuth} from "./store/api-actions";
 import {requireAuthorization} from "./store/action";
 import {AuthorizationStatus} from "./const";
-import rootReducer from "./store/reducers/root-reducer";
 import {redirect} from './store/middlewares/redirect';
+import rootReducer from "./store/reducers/root/root-reducer";
 
 const api = createApi(() => store.dispatch(requireAuthorization(AuthorizationStatus.NOT_AUTHORIZED)));
 

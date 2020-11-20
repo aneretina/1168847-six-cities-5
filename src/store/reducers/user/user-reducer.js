@@ -1,11 +1,11 @@
 
-import {extend} from '../../utils';
-import {ActionType} from '../action';
-import {AuthorizationStatus} from '../../const';
+import {extend} from '../../../utils';
+import {ActionType} from '../../action';
+import {AuthorizationStatus} from '../../../const';
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NOT_AUTHORIZED,
-  email: ``
+  email: ``,
 };
 
 const user = (state = initialState, action) => {
@@ -19,7 +19,6 @@ const user = (state = initialState, action) => {
       return extend(state, {
         email: action.payload,
       });
-
   }
   return state;
 };

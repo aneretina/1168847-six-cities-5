@@ -64,3 +64,14 @@ export const fetchReviewsList = (offerId) => (dispatch, _getState, api) => (
   })
 );
 
+export const sendReview = ({review: comment, rating}, offerId) => (dispatch, _getState, api) => {
+  return api.post(`/comments/${offerId}`, {comment, rating})
+  .then(({data}) => {
+    const modifiedNewReviews = data.map((newReview) => adaptReview(newReview));
+    dispatch(loadReviews(modifiedNewReviews));
+  })
+  .catch((err) => {
+    throw err;
+  });
+};
+

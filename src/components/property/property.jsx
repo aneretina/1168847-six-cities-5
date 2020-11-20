@@ -3,37 +3,42 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import OfferMap from "../offer-map/offer-map";
 import OffersList from "../offers-list/offers-list";
-import NewCommentForm from "../new-comment-form/new-comment-form";
-import {getCurrentCityOffers, getCurrentCity, getAuthorizationStatus, getNearOffers, getReviews} from "../../store/selectors/selectors";
-import Header from "../ header/header";
-import {TO_PERCENT, FavoriteBtnType} from "../../const";
+import ReviewForm from "../review-form/review-form";
+import {getCurrentCity, getAuthorizationStatus, getNearOffers, getReviews, getOffers} from "../../store/selectors/selectors";
+import Header from "../header/header";
+import {TO_PERCENT, FavoriteBtnType, AuthorizationStatus} from "../../const";
 import {changeFavoriteStatus, fetchNearOffersList, fetchReviewsList} from "../../store/api-actions";
 import offerProp from "../offer-card/offer.prop";
 import ReviewsList from "../reviews-list/reviews-list";
 import reviewProp from "../review/review.prop";
 import FavoriteButton from "../favorite-button/favorite-button";
+import browserHistory from "../../browser-history";
 
 
 class Property extends PureComponent {
   constructor(props) {
     super(props);
+    this.onFavoriteButtonClick = this.onFavoriteButtonClick.bind(this);
   }
-
   componentDidMount() {
     this.props.loadNearOffersAction(this.props.id);
     this.props.loadReviewsAction(this.props.id);
   }
 
 
+  onFavoriteButtonClick(offer) {
+    if (this.props.authorizationStatus === AuthorizationStatus.NOT_AUTHORIZED) {
+      browserHistory.push(`/login`);
+    }
+
+    this.props.changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
+  }
+
   render() {
     const {offers, reviews, id, activeCity, authorizationStatus, changeFavoriteStatusAction, nearOffers} = this.props;
-    const offer = offers.find((offerCurrent) => offerCurrent.id === +id);
+    const offer = offers.find((offerCurrent) => offerCurrent.id === Number(id));
 
     const picturesForShow = offer.pictures.slice(0, 6);
-
-    const onFavoriteButtonClick = () => {
-      changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
-    };
 
     return (
       <div className="page">
@@ -65,8 +70,10 @@ class Property extends PureComponent {
                   <FavoriteButton
                     type={FavoriteBtnType.PROPERTY}
                     isFavorite={offer.isFavorite}
-                    onFavoriteButtonClick={onFavoriteButtonClick}
-                  />
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      this.onFavoriteButtonClick(offer);
+                    }}/>
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -117,7 +124,9 @@ class Property extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={reviews} />
-                  <NewCommentForm />
+                  {authorizationStatus === AuthorizationStatus.AUTHORIZED &&
+                  <ReviewForm id={id} />
+                  }
                 </section>
               </div>
             </div>
@@ -139,7 +148,9 @@ class Property extends PureComponent {
                 <OffersList offers={nearOffers}
                   authorizationStatus={authorizationStatus}
                   changeFavoriteStatusAction={changeFavoriteStatusAction}
-                  className={`near-places__list`} />
+                  className={`near-places__list`}
+                  onClick={this.onFavoriteButtonClick}
+                />
               </>
               }
             </section>
@@ -152,7 +163,7 @@ class Property extends PureComponent {
 }
 
 Property.propTypes = {
-  nearOffers: PropTypes.array.isRequired,
+  nearOffers: PropTypes.arrayOf(offerProp),
   loadNearOffersAction: PropTypes.func.isRequired,
   loadReviewsAction: PropTypes.func.isRequired,
   activeCity: PropTypes.string.isRequired,
@@ -164,7 +175,7 @@ Property.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: getCurrentCityOffers(state),
+  offers: getOffers(state),
   activeCity: getCurrentCity(state),
   authorizationStatus: getAuthorizationStatus(state),
   nearOffers: getNearOffers(state),

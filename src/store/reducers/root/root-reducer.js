@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import {user} from './user-reducer';
-import {loadData} from './data/data-reducer';
-import {processApp} from './app-process/process';
+import {user} from '../user/user-reducer';
+import {loadData} from '../data/data-reducer';
+import {processApp} from '../process/process';
 
 
 export const NameSpace = {
