@@ -38,7 +38,6 @@ class Property extends PureComponent {
   render() {
     const {offers, reviews, id, activeCity, authorizationStatus, changeFavoriteStatusAction, nearOffers} = this.props;
     const offer = offers.find((offerCurrent) => offerCurrent.id === Number(id));
-
     const picturesForShow = offer.pictures.slice(0, 6);
 
     return (

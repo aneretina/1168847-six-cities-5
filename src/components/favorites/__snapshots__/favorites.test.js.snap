@@ -336,7 +336,7 @@ exports[`Favorites render correctly Favorites not empty 1`] = `
             >
               <article
                 className="favorites__card place-card"
-                id={2}
+                id={1}
               >
                 <div
                   className="favorites__image-wrapper place-card__image-wrapper"

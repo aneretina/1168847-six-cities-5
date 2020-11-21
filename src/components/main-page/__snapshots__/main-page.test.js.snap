@@ -391,7 +391,7 @@ exports[`MainPage render correctly MainPage 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
-              id={2}
+              id={1}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
@@ -410,7 +410,7 @@ exports[`MainPage render correctly MainPage 1`] = `
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
-                  href="/offer/2"
+                  href="/offer/1"
                   onClick={[Function]}
                 >
                   <img
@@ -488,7 +488,7 @@ exports[`MainPage render correctly MainPage 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/offer/2"
+                    href="/offer/1"
                     onClick={[Function]}
                   >
                     Beautiful & luxurious apartment in Paris

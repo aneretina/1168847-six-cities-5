@@ -32,7 +32,7 @@ export const offers = [
   },
 
   {
-    id: 2,
+    id: 1,
     city: {
       name: `Paris`,
       location: {

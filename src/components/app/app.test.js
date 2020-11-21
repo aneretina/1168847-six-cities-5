@@ -13,9 +13,7 @@ it(`App render`, () => {
   const tree = renderer
      .create(
          <BrowserRouter>
-           <App
-             id={1}
-           />
+           <App/>
          </BrowserRouter>
      )
 
