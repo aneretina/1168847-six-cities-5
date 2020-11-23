@@ -6,7 +6,8 @@ import {BrowserRouter} from 'react-router-dom';
 import rootReducer from "../../store/reducers/root/root-reducer";
 import {MainPage} from "./main-page";
 import {SortOptions, AuthorizationStatus} from "../../const";
-import {offers} from "../../mocks/offers";
+import {offersMock} from "../../mocks/offers";
+
 
 const store = createStore(rootReducer);
 
@@ -22,7 +23,7 @@ describe(`MainPage render correctly`, () => {
             <BrowserRouter>
               <MainPage
                 city={`Amsterdam`}
-                currentCityOffers={offers}
+                currentCityOffers={offersMock}
                 onChangeSort={noop}
                 changeFavoriteStatusAction={noop}
                 sort={SortOptions.POPULAR}

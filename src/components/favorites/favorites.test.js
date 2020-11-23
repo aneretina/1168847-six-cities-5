@@ -5,7 +5,8 @@ import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import {Favorites} from "./favorites";
 import rootReducer from "../../store/reducers/root/root-reducer";
-import {offers} from "../../mocks/offers";
+import {offersMock} from "../../mocks/offers";
+
 
 const store = createStore(rootReducer);
 
@@ -36,7 +37,7 @@ describe(`Favorites render correctly`, () => {
           <Provider store={store}>
             <BrowserRouter>
               <Favorites
-                favoriteOffers={offers}
+                favoriteOffers={offersMock}
                 onFavoriteButtonClick={noop}
                 loadFavoriteOffersAction={noop}
                 changeFavoriteStatus={noop}

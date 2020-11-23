@@ -5,12 +5,13 @@ import {CITIES} from "../../const";
 
 
 it(`Should CitiesList render properly`, () => {
+  const noop = () => {};
   const tree = renderer
     .create(
         <CitiesList
           currentCity={CITIES[4]}
           cities={CITIES}
-          onCityClick={() => {}}/>
+          onCityClick={noop}/>
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

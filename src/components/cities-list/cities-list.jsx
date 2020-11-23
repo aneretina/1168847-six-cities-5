@@ -16,8 +16,7 @@ const CitiesList = (props) => {
             {cities.map((item, index) => (
               <li key={`${item}-${index}`}
                 className="locations__item"
-                onClick={(evt) => {
-                  evt.preventDefault();
+                onClick={() => {
                   onCityClick(item);
                 }}>
                 <a

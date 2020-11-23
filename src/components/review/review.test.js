@@ -1,14 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Review from "./review";
-import {reviews} from "../../mocks/reviews";
+import {reviewsMock} from "../../mocks/reviews";
 
 it(`Should Review render properly`, () => {
 
   const tree = renderer
     .create(
         <Review
-          review={reviews[1]}
+          review={reviewsMock[1]}
         />
     )
     .toJSON();

@@ -3,7 +3,7 @@
 exports[`Should FavoriteCard render properly 1`] = `
 <article
   className="favorites__card place-card"
-  id={15}
+  id={9}
 >
   <div
     className="favorites__image-wrapper place-card__image-wrapper"
@@ -15,7 +15,7 @@ exports[`Should FavoriteCard render properly 1`] = `
         alt="Place image"
         className="place-card__image"
         height="110"
-        src="img/apartment-01.jpg"
+        src="img/apartment-03.jpg"
         width="150"
       />
     </a>
@@ -33,7 +33,7 @@ exports[`Should FavoriteCard render properly 1`] = `
           className="place-card__price-value"
         >
           € 
-          180
+          220
         </b>
         <span
           className="place-card__price-text"
@@ -42,7 +42,7 @@ exports[`Should FavoriteCard render properly 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button place-card__bookmark-button--active button"
+        className="place-card__bookmark-button button"
         onClick={[Function]}
         type="button"
       >
@@ -58,7 +58,7 @@ exports[`Should FavoriteCard render properly 1`] = `
         <span
           className="visually-hidden"
         >
-          In bookmarks
+          To bookmarks
         </span>
       </button>
     </div>
@@ -71,7 +71,7 @@ exports[`Should FavoriteCard render properly 1`] = `
         <span
           style={
             Object {
-              "width": "60%",
+              "width": "20%",
             }
           }
         />
@@ -88,13 +88,13 @@ exports[`Should FavoriteCard render properly 1`] = `
       <a
         href="#"
       >
-        Wood and stone place
+        Beautiful & luxurious apartment in Cologne
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      room
+      Apartment
     </p>
   </div>
 </article>

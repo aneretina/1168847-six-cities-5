@@ -1,4 +1,4 @@
-import {getOffersList, loadOffers, requireAuthorization, redirectToRoute, setLoggedUser, loadFavoriteOffers, loadNearOffers, loadReviews} from '../store/action';
+import {loadOffers, requireAuthorization, redirectToRoute, setLoggedUser, loadFavoriteOffers, loadNearOffers, loadReviews} from '../store/action';
 import {adaptOffer, adaptReview} from '../utils';
 import {AuthorizationStatus} from '../const';
 
@@ -7,7 +7,6 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(`/hotels`).then(({data}) => {
     const modifiedToClientOffers = data.map((offer) => adaptOffer(offer));
     dispatch(loadOffers(modifiedToClientOffers));
-    dispatch(getOffersList());
   })
 );
 

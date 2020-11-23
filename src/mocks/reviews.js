@@ -1,4 +1,4 @@
-export const reviews = [
+export const reviewsMock = [
   {
     id: 64,
     date: new Date(`Tue Oct 27 2020 12:29:21 GMT+0300`),

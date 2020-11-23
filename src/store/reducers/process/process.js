@@ -40,7 +40,7 @@ const processApp = (state = initialState, action) => {
         });
       }
       return extend(state, {
-        currentOffers: getSortedOffersByType(state.currentOffers, action.changeSortOptions),
+        currentoffers: getSortedOffersByType(state.currentOffers, action.changeSortOptions),
       });
 
     case ActionType.LOAD_FAVORITE_OFFERS:

@@ -10,12 +10,13 @@ const store = createStore(rootReducer);
 
 describe(`Login render correctly`, () => {
   it(`Login when user no auth`, () => {
+    const noop = () => {};
     const tree = renderer
       .create(
           <Provider store={store}>
             <BrowserRouter>
               <Login
-                onSubmit={() => {}}
+                onSubmit={noop}
               />
             </BrowserRouter>
           </Provider>

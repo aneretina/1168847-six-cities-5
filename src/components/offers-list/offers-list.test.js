@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import OffersList from "./offers-list";
 import rootReducer from "../../store/reducers/root/root-reducer";
 import {AuthorizationStatus} from "../../const";
-import {offers} from "../../mocks/offers";
+import {offersMock} from "../../mocks/offers";
 
 
 const store = createStore(rootReducer);
@@ -18,7 +18,7 @@ it(`OfferList render correctly`, () => {
         <Provider store={store}>
           <BrowserRouter>
             <OffersList
-              offers={offers}
+              offers={offersMock}
               className={`cities__places-list tabs__content`}
               authorizationStatus={AuthorizationStatus.NOT_AUTHORIZED}
               changeFavoriteStatusAction={noop}

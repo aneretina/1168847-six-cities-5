@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {offers} from '../../mocks/offers';
 import {AuthorizationStatus} from '../../const';
-import {reviews} from '../../mocks/reviews';
+import {reviewsMock} from '../../mocks/reviews';
 import {Property} from './property';
 import {BrowserRouter} from 'react-router-dom';
 import {createStore} from 'redux';
 import rootReducer from '../../store/reducers/root/root-reducer';
 import {Provider} from 'react-redux';
+import {offersMock} from '../../mocks/offers';
 
 jest.mock(`../offer-map/offer-map`, () => `OfferMap`);
 
@@ -20,15 +20,15 @@ it(`Should Property render properly`, () => {
           <Provider store={store}>
             <BrowserRouter>
               <Property
-                nearOffers={offers}
+                nearOffers={offersMock}
                 loadNearOffersAction={noop}
                 loadReviewsAction={noop}
                 activeCity={`Paris`}
                 id={1}
-                offers={offers}
+                offers={offersMock}
                 authorizationStatus={AuthorizationStatus.AUTHORIZED}
                 changeFavoriteStatusAction={noop}
-                reviews={reviews}
+                reviews={reviewsMock}
               />
             </BrowserRouter>
           </Provider>)
