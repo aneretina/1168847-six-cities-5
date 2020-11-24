@@ -32,17 +32,6 @@ const processApp = (state = initialState, action) => {
       return extend(state, {
         currentSort: action.payload,
       });
-
-    case ActionType.CHANGE_OFFERS_BY_SORT:
-      if (action.changeSortOptions === initialState.currentSort) {
-        return extend(state, {
-          offers: action.payload,
-        });
-      }
-      return extend(state, {
-        currentoffers: getSortedOffersByType(state.currentOffers, action.changeSortOptions),
-      });
-
     case ActionType.LOAD_FAVORITE_OFFERS:
       return extend(state, {
         favoriteOffers: action.payload

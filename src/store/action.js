@@ -3,7 +3,6 @@ export const ActionType = {
   SET_ACTIVE_OFFER_ID: `SET_ACTIVE_OFFER_ID`,
   RESET_ACTIVE_OFFER_ID: `SET_ACTIVE_OFFER_ID`,
   CHANGE_SORT_OPTIONS: `CHANGE_SORT_OPTIONS`,
-  CHANGE_OFFERS_BY_SORT: `CHANGE_OFFERS_BY_SORT`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
@@ -32,11 +31,6 @@ export const resetActiveOfferId = () => ({
 
 export const changeSortOptions = (sortType) => ({
   type: ActionType.CHANGE_SORT_OPTIONS,
-  payload: sortType,
-});
-
-export const changeOffersBySort = (sortType) => ({
-  type: ActionType.CHANGE_OFFERS_BY_SORT,
   payload: sortType,
 });
 

@@ -29,9 +29,10 @@ it(`Reducer should update user`, () => {
     email: {},
   }, {
     type: ActionType.LOAD_LOGGED_INFO,
-    payload: {fake: true},
+    payload: `muster.mustermann@gmail.com`,
   })).toEqual({
     authorizationStatus: AuthorizationStatus.AUTHORIZED,
-    email: {fake: true},
+    email: `muster.mustermann@gmail.com`,
   });
 });
+

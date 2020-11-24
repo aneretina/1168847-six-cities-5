@@ -149,7 +149,6 @@ class Property extends PureComponent {
                   authorizationStatus={authorizationStatus}
                   changeFavoriteStatusAction={changeFavoriteStatusAction}
                   className={`near-places__list`}
-                  onClick={this.onFavoriteButtonClick}
                 />
               </>
               }
