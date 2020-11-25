@@ -1,6 +1,6 @@
 
 import {CITIES, SortOptions} from "../../../const";
-import {extend, getSortedOffersByType} from "../../../utils";
+import {extend} from "../../../utils";
 import {ActionType} from "../../action";
 
 
@@ -39,7 +39,7 @@ const processApp = (state = initialState, action) => {
 
     case ActionType.LOAD_NEAR_OFFERS:
       return extend(state, {
-        nearOffers: action.payload,
+        nearOffers: action.payload.map(({id}) => id),
       });
 
     case ActionType.LOAD_REVIEWS:

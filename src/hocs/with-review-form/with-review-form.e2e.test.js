@@ -13,7 +13,7 @@ const MockComponentWrapped = withReviewForm(MockComponent);
 
 describe(`withReviewForm HOC test`, () => {
 
-  it(`test original HOC state`, () => {
+  it(`test initial HOC state`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
     expect(wrapper.state().rating).toEqual(``);
@@ -21,23 +21,18 @@ describe(`withReviewForm HOC test`, () => {
     expect(wrapper.state().isDisabled).toEqual(false);
   });
 
-  it(`test when invoke _changeDisableFormAttribute`, () => {
+  it(`when _updateDisableFormStatus works correctly`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
     const instance = wrapper.instance();
-    instance.updateDisableFormStatus(true);
+    instance._updateDisableFormStatus(true);
 
     expect(wrapper.state().isDisabled).toEqual(true);
   });
 
-  it(`test when invoke _handleInputChange`, () => {
+  it(`test when text and rating is entered`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
     const instance = wrapper.instance();
-    const enteredRating = {
-      target: {
-        name: `rating`,
-        value: `1`
-      }
-    };
+
     const enteredReview = {
       target: {
         name: `review`,
@@ -45,14 +40,21 @@ describe(`withReviewForm HOC test`, () => {
       }
     };
 
-    instance.onRatingChange(enteredRating);
-    instance.onTextChange(enteredReview);
+    const enteredRating = {
+      target: {
+        name: `rating`,
+        value: `1`
+      }
+    };
+
+    instance._onRatingChange(enteredRating);
+    instance._onTextChange(enteredReview);
 
     expect(wrapper.state().rating).toEqual(`1`);
     expect(wrapper.state().review).toEqual(`some text`);
   });
 
-  it(`test when invoke _resetState`, () => {
+  it(`when reset the state to the initial state `, () => {
     const wrapper = shallow(<MockComponentWrapped />);
     const instance = wrapper.instance();
     instance.resetState();
