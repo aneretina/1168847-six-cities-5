@@ -20,6 +20,7 @@ class Property extends PureComponent {
     super(props);
     this.onFavoriteButtonClick = this.onFavoriteButtonClick.bind(this);
   }
+
   componentDidMount() {
     this.props.loadNearOffersAction(this.props.id);
     this.props.loadReviewsAction(this.props.id);
@@ -37,7 +38,6 @@ class Property extends PureComponent {
   render() {
     const {offers, reviews, id, activeCity, authorizationStatus, changeFavoriteStatusAction, nearOffers} = this.props;
     const offer = offers.find((offerCurrent) => offerCurrent.id === Number(id));
-
     const picturesForShow = offer.pictures.slice(0, 6);
 
     return (
@@ -149,7 +149,6 @@ class Property extends PureComponent {
                   authorizationStatus={authorizationStatus}
                   changeFavoriteStatusAction={changeFavoriteStatusAction}
                   className={`near-places__list`}
-                  onClick={this.onFavoriteButtonClick}
                 />
               </>
               }

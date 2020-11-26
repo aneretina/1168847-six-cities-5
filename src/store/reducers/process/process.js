@@ -1,11 +1,10 @@
 
 import {CITIES, SortOptions} from "../../../const";
-import {extend, getSortedOffersByType} from "../../../utils";
+import {extend} from "../../../utils";
 import {ActionType} from "../../action";
 
 
 const initialState = {
-  currentCityOffers: [],
   cities: CITIES,
   activeOfferId: -1,
   currentSort: SortOptions.POPULAR,
@@ -33,17 +32,6 @@ const processApp = (state = initialState, action) => {
       return extend(state, {
         currentSort: action.payload,
       });
-
-    case ActionType.CHANGE_OFFERS_BY_SORT:
-      if (action.changeSortOptions === initialState.currentSort) {
-        return extend(state, {
-          offers: action.payload,
-        });
-      }
-      return extend(state, {
-        currentOffers: getSortedOffersByType(state.currentOffers, action.changeSortOptions),
-      });
-
     case ActionType.LOAD_FAVORITE_OFFERS:
       return extend(state, {
         favoriteOffers: action.payload
@@ -51,7 +39,7 @@ const processApp = (state = initialState, action) => {
 
     case ActionType.LOAD_NEAR_OFFERS:
       return extend(state, {
-        nearOffers: action.payload,
+        nearOffers: action.payload.map(({id}) => id),
       });
 
     case ActionType.LOAD_REVIEWS:

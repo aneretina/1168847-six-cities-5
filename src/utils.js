@@ -53,7 +53,6 @@ export const adaptOffer = (offer) => {
       name: offer[`host`][`name`],
       isPro: offer[`host`][`is_pro`],
     },
-    offersNear: []
   };
 };
 

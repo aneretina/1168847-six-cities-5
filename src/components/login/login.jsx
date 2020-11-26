@@ -14,7 +14,9 @@ class Login extends PureComponent {
   }
 
   handleSubmit(evt) {
-    evt.preventDefault();
+    if (evt) {
+      evt.preventDefault();
+    }
 
     if (EMAIL_REGEX.test(this.loginRef.current.value) && this.passwordRef.current.value) {
       this.props.onSubmit({

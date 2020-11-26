@@ -35,7 +35,8 @@ const MainPage = (props) => {
                   onChangeSort={onChangeSort}/>
                 <OffersList
                   offers={sortedOffers}
-                  className={`cities__places-list tabs__content`}authorizationStatus={authorizationStatus}
+                  className={`cities__places-list tabs__content`}
+                  authorizationStatus={authorizationStatus}
                   changeFavoriteStatusAction={changeFavoriteStatusAction}
                 />
               </section>
