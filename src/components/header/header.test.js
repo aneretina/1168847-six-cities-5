@@ -8,7 +8,7 @@ it(`Should Header render correctly`, () => {
     .create(
         <BrowserRouter>
           <Header
-            isAuthorized={``}np
+            isAuthorized={``}
             email={``}
           />
         </BrowserRouter>
