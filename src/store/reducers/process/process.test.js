@@ -77,9 +77,9 @@ describe(`Process reducers work correctly`, () => {
       nearOffers: [],
     }, {
       type: ActionType.LOAD_NEAR_OFFERS,
-      payload: []
+      payload: offersMock
     })).toEqual({
-      nearOffers: []
+      nearOffers: offersMock.map(({id}) => id),
     });
   });
 
