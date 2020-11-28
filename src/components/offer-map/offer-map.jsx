@@ -116,7 +116,7 @@ OfferMap.propTypes = {
   offerId: PropTypes.number.isRequired,
   cityCoords: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired,
-  mainOffer: PropTypes.object,
+  mainOffer: offerProp,
 };
 
 const mapStateToProps = (state, props) => ({
